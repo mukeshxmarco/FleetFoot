@@ -11,6 +11,7 @@ from .forms import CheckoutForm, CouponForm, RefundForm
 from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund, Category
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
+from .utils import CITIES_LIST
 
 # Create your views here.
 import random
@@ -159,9 +160,10 @@ class CheckoutView(View):
             form = CheckoutForm()
             context = {
                 'form': form,
+                'cities': CITIES_LIST,
                 'couponform': CouponForm(),
                 'order': order,
-                'DISPLAY_COUPON_FORM': True
+                'DISPLAY_COUPON_FORM': True,
             }
             return render(self.request, "checkout.html", context)
 
@@ -173,16 +175,12 @@ class CheckoutView(View):
         form = CheckoutForm(self.request.POST or None)
         try:
             order = Order.objects.get(user=self.request.user, ordered=False)
-            print(self.request.POST)
             if form.is_valid():
                 street_address = form.cleaned_data.get('street_address')
                 apartment_address = form.cleaned_data.get('apartment_address')
-                country = form.cleaned_data.get('country')
+                city = form.cleaned_data.get('city')
+                country = "India"  # form.cleaned_data.get('country')
                 zip = form.cleaned_data.get('zip')
-                # add functionality for these fields
-                # same_shipping_address = form.cleaned_data.get(
-                #     'same_shipping_address')
-                # save_info = form.cleaned_data.get('save_info')
                 payment_option = form.cleaned_data.get('payment_option')
                 billing_address = BillingAddress(
                     user=self.request.user,
@@ -190,13 +188,13 @@ class CheckoutView(View):
                     apartment_address=apartment_address,
                     country=country,
                     zip=zip,
-                    address_type='B'
+                    address_type='B',
+                    city=city,
                 )
                 billing_address.save()
                 order.billing_address = billing_address
                 order.save()
 
-                # add redirect to the selected payment option
                 if payment_option == 'S':
                     return redirect('core:payment', payment_option='stripe')
                 elif payment_option == 'P':
@@ -205,6 +203,16 @@ class CheckoutView(View):
                     messages.warning(
                         self.request, "Invalid payment option select")
                     return redirect('core:checkout')
+            else:
+                messages.error(self.request, "Please correct the errors below.")
+                context = {
+                    'form': form,
+                    'cities': CITIES_LIST,
+                    'couponform': CouponForm(),
+                    'order': order,
+                    'DISPLAY_COUPON_FORM': True,
+                }
+                return render(self.request, "checkout.html", context)
         except ObjectDoesNotExist:
             messages.error(self.request, "You do not have an active order")
             return redirect("core:order-summary")
