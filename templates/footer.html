@@ -1,108 +1,272 @@
 {% load static %}
-<!-- ------------------------------footer sub end---------------------------------- -->
 <!-- Google Font -->
-<link href="https://fonts.googleapis.com/css?family=Abel|Lato|Open+Sans&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700&display=swap" rel="stylesheet">
 <style>
+  /* Modern footer styles */
+  #footer-main {
+    background: #222;
+    color: #f5f5f5;
+    font-family: 'Poppins', sans-serif;
+    padding: 4rem 0 1rem;
+    margin-top: 5rem;
+    position: relative;
+  }
   
-    /* footer */
-#footer-main{
-	background: #000;
-	color: white;
-	font-size: 0.8rem;
-	padding: 2.5rem 0;
-    font-family: 'Lato', sans-serif;
-}
-
-#footer-main a{
-	font-size: 14px;
-	display: block;
-	margin: 0.3rem;
-	color: grey;
-}
-
-#footer-main a:hover{
-	font-weight: bold;
-	color: white;
-}
-
-#footer-main h6 a{
+  #footer-main::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #717fe0 0%, #5c6bc0 100%);
+  }
+  
+  .footer-heading {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
     color: white;
-
-    
-}
-
-
-
-#footer-main hr {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    position: relative;
+    padding-bottom: 0.8rem;
+  }
+  
+  .footer-heading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: 40px;
+    background-color: #717fe0;
+  }
+  
+  #footer-main a {
+    font-size: 0.95rem;
+    display: block;
+    margin: 0.6rem 0;
+    color: #a0a0a0;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  
+  #footer-main a:hover {
+    color: white;
+    text-decoration: none;
+    transform: translateX(5px);
+  }
+  
+  #footer-main hr {
+    margin: 2rem 0;
     border: 0;
-    border-top: 1px solid white;
-}
-
-#footer-main img{
-	margin-right: 0.6rem;
-}
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .social-icons {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+  
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 50%;
+    margin-right: 0.8rem;
+    transition: all 0.3s ease;
+  }
+  
+  .social-icon:hover {
+    background-color: #717fe0;
+    transform: translateY(-3px);
+  }
+  
+  .social-icon i {
+    color: white;
+    font-size: 1.2rem;
+  }
+  
+  .app-download {
+    display: flex;
+    align-items: center;
+    padding: 0.8rem 1.2rem;
+    background-color: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .app-download:hover {
+    background-color: rgba(255,255,255,0.15);
+    transform: translateY(-3px);
+  }
+  
+  .app-icon {
+    margin-right: 1rem;
+  }
+  
+  .app-text {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .app-text small {
+    font-size: 0.7rem;
+    color: #a0a0a0;
+  }
+  
+  .app-text span {
+    font-size: 1rem;
+    font-weight: 500;
+    color: white;
+  }
+  
+  .copyright {
+    font-size: 0.85rem;
+    color: #a0a0a0;
+    text-align: center;
+    margin-top: 2rem;
+  }
+  
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .footer-links {
+    display: flex;
+  }
+  
+  .footer-links a {
+    margin: 0 1rem !important;
+    display: inline-block !important;
+    transform: none !important;
+  }
+  
+  .newsletter-form {
+    display: flex;
+    margin-top: 1.5rem;
+  }
+  
+  .newsletter-input {
+    flex-grow: 1;
+    background-color: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px 0 0 4px;
+    padding: 0.6rem 1rem;
+    color: white;
+    font-size: 0.95rem;
+  }
+  
+  .newsletter-input:focus {
+    outline: none;
+    border-color: #717fe0;
+  }
+  
+  .newsletter-btn {
+    background: linear-gradient(90deg, #717fe0 0%, #5c6bc0 100%);
+    color: white;
+    border: none;
+    padding: 0 1.5rem;
+    border-radius: 0 4px 4px 0;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+  
+  .newsletter-btn:hover {
+    background: linear-gradient(90deg, #5c6bc0 0%, #717fe0 100%);
+  }
 </style>
 
 <footer id="footer-main">
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-3">
-            <br>
-
-            <h6 class="mt-3"><a href="">FIND A STORE</a></h6>
-            <h6 class="mt-3"><a href="">SIGN UP FOR EMAIL</a></h6>
-            <h6 class="mt-3"><a href="">BECOME A MEMBER</h6>
-            
-            <h6 class="mt-3"><a href="/admin/">ADMIN LOGIN</a></h6>
-           
-        </div>
-        <div class="col-sm-3">
-            <h6 class="mt-3"><a href="">GET HELP</a></h6>
-            <a href="">Order Status</a>
-            <a href="">Shipping and Delivery</a>
-            <a href="">Returns</a>
-            <a href="">Payment Options</a>
-            <a href="">Contact Us</a>
-        </div>
-        <div class="col-sm-3">
-            <h6 class="mt-3"><a href="">ABOUT DJANGO</a></h6>
-            <a href="">News</a>
-            <a href="">Careers</a>
-            <a href="">Investors</a>
-            <a href="">Sustainability</a>
-            
-            
-
-
-
-        </div>
-        <div class="col-sm-3">
-          <a href="">Voice of Customer</a>
-          <a href="">Contacts by Branch</a>
-          <a href="">Ethics Reporting</a>
-          <a href="">Careers</a>
-
-          <br><br>
-          <a href="">Business Inquiry</a>
-          <br>
-          <a href="" class="ico"><i class="fab fa-apple fa-2x"></i> Apple Store</a>
-          <a href="" class="ico"><i class="fab fa-google-play fa-2x"></i> Google Play</a>
-        </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 col-lg-3 mb-4">
+        <h6 class="footer-heading">ABOUT US</h6>
+        <p class="mb-4" style="color: #a0a0a0; font-size: 0.95rem; line-height: 1.6;">
+          FleetFoot is your premier destination for the latest footwear fashion and accessories, delivering quality products worldwide.
+        </p>
       </div>
-      <hr>
-      <div class="row">
-        <div class="col-sm-6">
-          
+      
+      <div class="col-6 col-md-4 col-lg-2 mb-4">
+        <h6 class="footer-heading">SHOPPING</h6>
+        <a href="/shop/">Shop All</a>
+        <a href="#">New Arrivals</a>
+        <a href="#">Featured Products</a>
+        <a href="#">Discounts</a>
+        <a href="#">Gift Cards</a>
+      </div>
+      
+      <div class="col-6 col-md-4 col-lg-2 mb-4">
+        <h6 class="footer-heading">SUPPORT</h6>
+        <a href="#">Order Status</a>
+        <a href="#">Shipping & Delivery</a>
+        <a href="#">Returns & Exchanges</a>
+        <a href="#">Payment Options</a>
+        <a href="#">Contact Us</a>
+      </div>
+      
+      <div class="col-md-4 col-lg-2 mb-4">
+        <h6 class="footer-heading">INFORMATION</h6>
+        <a href="#">About FleetFoot</a>
+        <a href="#">Careers</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+        <a href="/admin/">Admin Login</a>
+      </div>
+      
+      <div class="col-md-6 col-lg-3 mb-4">
+        <h6 class="footer-heading">STAY CONNECTED</h6>
+        <p style="color: #a0a0a0; font-size: 0.95rem; margin-bottom: 1rem;">
+          Subscribe to our newsletter for the latest updates and offers.
+        </p>
+        <div class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Your email address">
+          <button class="newsletter-btn">Subscribe</button>
         </div>
-        <div class="col-sm-6">
-          
-        </div>
-        <hr>
-        <a href="https://github.com/zinmyoswe" style="margin-left: 1rem">Privacy Policy | @zinmyoswe 2019-2020</a>
+        
+        <h6 class="footer-heading mt-4">MOBILE APPS</h6>
+        <a href="#" class="app-download">
+          <div class="app-icon">
+            <i class="fab fa-apple fa-2x" style="color: white;"></i>
+          </div>
+          <div class="app-text">
+            <small>Download on the</small>
+            <span>App Store</span>
+          </div>
+        </a>
+        
+        <a href="#" class="app-download">
+          <div class="app-icon">
+            <i class="fab fa-google-play fa-2x" style="color: white;"></i>
+          </div>
+          <div class="app-text">
+            <small>GET IT ON</small>
+            <span>Google Play</span>
+          </div>
+        </a>
       </div>
     </div>
-  </footer>
+    
+    <hr>
+    
+    <div class="footer-bottom">
+      <div class="copyright">
+        &copy; 2025 FleetFoot. All rights reserved.
+      </div>
+      
+      <div class="footer-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
 <!-- ------------------------------footer end---------------------------------- -->
 

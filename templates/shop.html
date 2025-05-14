@@ -3,240 +3,497 @@
 {% load category_template_tags %}
 {% block content %}
 <style type="text/css">
-	.selection-2{
-	display: block;
-    width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da !important;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	.selection-2 {
+		display: block;
+		width: 100%;
+		height: calc(1.5em + .95rem + 2px);
+		padding: .475rem 1rem;
+		font-size: 1rem;
+		font-weight: 400;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 2px solid #e3e8ff !important;
+		border-radius: .5rem;
+		transition: all 0.3s ease;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+	}
+
+	.selection-2:focus {
+		border-color: #717fe0 !important;
+		box-shadow: 0 0 0 0.2rem rgba(113, 127, 224, 0.15);
+	}
+
+	/* Modern shop styles */
+	.shop-header {
+		background-image: linear-gradient(rgba(50, 50, 50, 0.5), rgba(30, 30, 30, 0.6)), url(/static/images/heading-pages-02.jpg);
+		background-position: center;
+		background-size: cover;
+		padding: 80px 0;
+		text-align: center;
+		margin-bottom: 3rem;
+		border-radius: 0 0 30px 30px;
+		box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+	}
+
+	.shop-header h2 {
+		color: #fff;
+		font-size: 3rem;
+		font-weight: 700;
+		letter-spacing: 1px;
+		text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+		margin-bottom: 0.5rem;
+	}
+
+	.shop-header p {
+		color: #f0f0f0;
+		font-size: 1.2rem;
+		font-weight: 300;
+	}
+
+	.filter-card {
+		background: #fff;
+		border-radius: 15px;
+		padding: 1.5rem;
+		margin-bottom: 2rem;
+		box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+		border: 1px solid #e3e8ff;
+	}
+
+	.filter-title {
+		font-size: 1.2rem;
+		font-weight: 600;
+		margin-bottom: 1.2rem;
+		color: #333;
+		position: relative;
+		padding-bottom: 0.5rem;
+	}
+
+	.filter-title:after {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 40px;
+		height: 2px;
+		background-color: #717fe0;
+	}
+
+	.category-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+
+	.category-list li {
+		padding: 0.5rem 0;
+		border-bottom: 1px solid #f0f3ff;
+		transition: all 0.2s ease;
+	}
+
+	.category-list li:last-child {
+		border-bottom: none;
+	}
+
+	.category-list li a {
+		color: #666;
+		font-weight: 500;
+		transition: all 0.3s ease;
+		display: block;
+		padding: 0.3rem 0.5rem;
+		border-radius: 4px;
+	}
+
+	.category-list li a:hover {
+		color: #717fe0;
+		padding-left: 0.8rem;
+		background-color: #f4f6ff;
+	}
+
+	.category-list li a.active1 {
+		color: #717fe0;
+		font-weight: 600;
+		background-color: #f4f6ff;
+		padding-left: 0.8rem;
+	}
+
+	.search-product {
+		border-radius: 50px;
+		overflow: hidden;
+		box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+		border: 2px solid #e3e8ff !important;
+		transition: all 0.3s ease;
+	}
+
+	.search-product:focus-within {
+		border-color: #717fe0 !important;
+		box-shadow: 0 3px 15px rgba(113,127,224,0.15);
+	}
+
+	.search-product input {
+		border: none;
+		height: 45px;
+		padding-left: 1.5rem;
+	}
+
+	.search-product button {
+		background: #717fe0;
+		color: white;
+		border-radius: 0 50px 50px 0;
+	}
+
+	/* Modern product card */
+	.product-card {
+		background: white;
+		border-radius: 15px;
+		overflow: hidden;
+		box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+		transition: all 0.3s ease;
+		margin-bottom: 2rem;
+		border: 1px solid #e3e8ff;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.product-card:hover {
+		transform: translateY(-7px);
+		box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+	}
+
+	.product-img {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.product-img img {
+		width: 100%;
+		height: 280px;
+		object-fit: cover;
+		transition: transform 0.5s ease;
+	}
+
+	.product-card:hover .product-img img {
+		transform: scale(1.05);
+	}
+
+	.product-info {
+		padding: 1.2rem 1.5rem;
+		flex-grow: 1;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.product-title {
+		font-size: 1.1rem;
+		font-weight: 600;
+		margin-bottom: 0.5rem;
+		color: #333;
+		line-height: 1.4;
+		transition: all 0.3s ease;
+	}
+
+	.product-title:hover {
+		color: #717fe0;
+	}
+
+	.product-price {
+		font-size: 1.2rem;
+		color: #717fe0;
+		font-weight: 700;
+		margin-top: 0.5rem;
+	}
+
+	.product-footer {
+		margin-top: 1rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.product-buttons {
+		display: flex;
+	}
+
+	.btn-view-product {
+		background: linear-gradient(90deg, #717fe0 0%, #5c6bc0 100%);
+		color: white;
+		border: none;
+		border-radius: 50px;
+		padding: 0.5rem 1.2rem;
+		font-size: 0.85rem;
+		font-weight: 600;
+		letter-spacing: 0.5px;
+		transition: all 0.3s ease;
+		text-transform: uppercase;
+		box-shadow: 0 3px 12px rgba(113,127,224,0.15);
+	}
+
+	.btn-view-product:hover {
+		background: linear-gradient(90deg, #5c6bc0 0%, #717fe0 100%);
+		transform: translateY(-2px);
+		box-shadow: 0 5px 15px rgba(113,127,224,0.2);
+	}
+
+	/* Pagination styles */
+	.modern-pagination {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-top: 3rem;
+	}
+
+	.page-item {
+		margin: 0 0.3rem;
+	}
+
+	.page-link {
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		font-weight: 600;
+		color: #666;
+		border: 2px solid #e3e8ff;
+		background-color: white;
+		transition: all 0.3s ease;
+	}
+
+	.page-link:hover {
+		background-color: #f4f6ff;
+		color: #717fe0;
+		border-color: #c1c9f8;
+	}
+
+	.page-link.active {
+		background-color: #717fe0;
+		color: white;
+		border-color: #717fe0;
+	}
+
+	.page-arrow {
+		width: 40px;
+		height: 40px;
 	}
 </style>
 
-	<!-- Title Page -->
-	<section class="bg-title-page p-t-50 p-b-40 flex-col-c-m" style="background-image: url(/static/images/heading-pages-02.jpg)	;">
-		<h2 class="l-text2 t-center">
-			Shop
-		</h2>
-		<p class="m-text13 t-center">
-			All categories
-		</p>
-	</section>
+<!-- Title Page -->
+<section class="shop-header">
+	<h2 class="l-text2 t-center">
+		Shop
+	</h2>
+	<p class="m-text13 t-center">
+		Discover Our Collection
+	</p>
+</section>
 
 
-	<!-- Content page -->
-	<section class="bgwhite p-t-55 p-b-65">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-50">
-					<div class="leftbar p-r-20 p-r-0-sm">
-						<!--  -->
-						<h4 class="m-text14 p-b-7">
-							Categories
-						</h4>
+<!-- Content page -->
+<section class="bgwhite p-t-55 p-b-65">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12 col-md-4 col-lg-3 p-b-50">
+				<div class="filter-card">
+					<h4 class="filter-title">
+						Categories
+					</h4>
 
-						<ul class="p-b-54">
-							<li class="p-t-4">
-								<a href="/shop" class="s-text13 active1">
-									All
-								</a>
-							</li>
+					<ul class="category-list">
+						<li>
+							<a href="/shop" class="s-text13 active1">
+								All Products
+							</a>
+						</li>
 
-							{% categories_li_a %}
+						{% categories_li_a %}
+					</ul>
+				</div>
 
-						</ul>
+				<!-- Search -->
+				<div class="filter-card">
+					<h4 class="filter-title">
+						Search Products
+					</h4>
 
-						<!--  -->
-						<h4 class="m-text14 p-b-32">
-							Filters
-						</h4>
+					<div class="search-product pos-relative of-hidden">
+						<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
 
-						<div class="filter-price p-t-22 p-b-50 bo3">
-							<div class="m-text15 p-b-17">
-								Price
-							</div>
+						<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+							<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+						</button>
+					</div>
+				</div>
 
-							<div class="wra-filter-bar">
-								<div id="filter-bar"></div>
-							</div>
+				<!--  Filters -->
+				<div class="filter-card">
+					<h4 class="filter-title">
+						Price Range
+					</h4>
 
-							<div class="flex-sb-m flex-w p-t-16">
-								<div class="w-size11">
-									<!-- Button -->
-									<button class="flex-c-m size4 bg7 bo-rad-15 hov1 s-text14 trans-0-4">
-										Filter
-									</button>
-								</div>
+					<div class="filter-price p-t-10 p-b-30">
+						<div class="wra-filter-bar">
+							<div id="filter-bar"></div>
+						</div>
 
-								<div class="s-text3 p-t-10 p-b-10">
+						<div class="flex-sb-m flex-w p-t-16">
+							<div class="w-full">
+								<span class="s-text3 p-t-10 p-b-10 d-block mb-3">
 									Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
-								</div>
+								</span>
+								<!-- Button -->
+								<button class="btn-view-product w-100">
+									Apply Filter
+								</button>
 							</div>
-						</div>
-
-						<div class="filter-color p-t-22 p-b-50 bo3">
-							<div class="m-text15 p-b-12">
-								Color
-							</div>
-
-							<ul class="flex-w">
-								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
-									<label class="color-filter color-filter1" for="color-filter1"></label>
-								</li>
-
-								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
-									<label class="color-filter color-filter2" for="color-filter2"></label>
-								</li>
-
-								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
-									<label class="color-filter color-filter3" for="color-filter3"></label>
-								</li>
-
-								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
-									<label class="color-filter color-filter4" for="color-filter4"></label>
-								</li>
-
-								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
-									<label class="color-filter color-filter5" for="color-filter5"></label>
-								</li>
-
-								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
-									<label class="color-filter color-filter6" for="color-filter6"></label>
-								</li>
-
-								<li class="m-r-10">
-									<input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
-									<label class="color-filter color-filter7" for="color-filter7"></label>
-								</li>
-							</ul>
-						</div>
-
-						<div class="search-product pos-relative bo4 of-hidden">
-							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
-
-							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
-							</button>
 						</div>
 					</div>
 				</div>
 
-				<div class="col-sm-6 col-md-8 col-lg-9 p-b-50">
-					<!--  -->
-					<div class="flex-sb-m flex-w p-b-35">
-						<div class="flex-w">
-						
-							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10" >
-								<select class="selection-2" name="sorting">
-									<option>Default Sorting</option>
-									<option>Popularity</option>
-									<option>Price: low to high</option>
-									<option>Price: high to low</option>
-								</select>
-							</div>
+				<!-- Color Filter -->
+				<div class="filter-card">
+					<h4 class="filter-title">
+						Color
+					</h4>
 
-							<div class="rs2-select2 bo4 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
-								<select class="selection-2" name="sorting">
-									<option>Price</option>
-									<option>$0.00 - $50.00</option>
-									<option>$50.00 - $100.00</option>
-									<option>$100.00 - $150.00</option>
-									<option>$150.00 - $200.00</option>
-									<option>$200.00+</option>
+					<ul class="flex-w p-t-10">
+						<li class="m-r-10 m-b-10">
+							<input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
+							<label class="color-filter color-filter1" for="color-filter1"></label>
+						</li>
 
-								</select>
+						<li class="m-r-10 m-b-10">
+							<input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
+							<label class="color-filter color-filter2" for="color-filter2"></label>
+						</li>
+
+						<li class="m-r-10 m-b-10">
+							<input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
+							<label class="color-filter color-filter3" for="color-filter3"></label>
+						</li>
+
+						<li class="m-r-10 m-b-10">
+							<input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
+							<label class="color-filter color-filter4" for="color-filter4"></label>
+						</li>
+
+						<li class="m-r-10 m-b-10">
+							<input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
+							<label class="color-filter color-filter5" for="color-filter5"></label>
+						</li>
+
+						<li class="m-r-10 m-b-10">
+							<input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
+							<label class="color-filter color-filter6" for="color-filter6"></label>
+						</li>
+
+						<li class="m-r-10 m-b-10">
+							<input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
+							<label class="color-filter color-filter7" for="color-filter7"></label>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-sm-12 col-md-8 col-lg-9 p-b-50">
+				<!--  -->
+				<div class="filter-card p-3 mb-4">
+					<div class="row align-items-center">
+						<div class="col-lg-8">
+							<div class="d-flex flex-wrap">
+								<div class="rs2-select2 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+									<select class="selection-2" name="sorting">
+										<option>Default Sorting</option>
+										<option>Popularity</option>
+										<option>Price: low to high</option>
+										<option>Price: high to low</option>
+									</select>
+								</div>
+
+								<div class="rs2-select2 of-hidden w-size12 m-t-5 m-b-5 m-r-10">
+									<select class="selection-2" name="sorting">
+										<option>Price</option>
+										<option>$0.00 - $50.00</option>
+										<option>$50.00 - $100.00</option>
+										<option>$100.00 - $150.00</option>
+										<option>$150.00 - $200.00</option>
+										<option>$200.00+</option>
+									</select>
+								</div>
 							</div>
 						</div>
-
-						<span class="s-text8 p-t-5 p-b-5">
-							Showing 1–12 of 16 results
-						</span>
+						<div class="col-lg-4 text-right">
+							<span class="s-text8 p-t-5 p-b-5">
+								Showing 1–12 of 16 results
+							</span>
+						</div>
 					</div>
+				</div>
 
-					<!-- Product -->
-					<div class="row">
-						{% for item in object_list %}
-						<div class="col-sm-12 col-md-6 col-lg-4 p-b-50">
-							<!-- Block2 -->
-							<div class="block2">
+				<!-- Product Grid -->
+				<div class="row">
+					{% for item in object_list %}
+					<div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+						<div class="product-card">
+							<div class="product-img">
 								<a href="{{item.get_absolute_url}}">
-								<div class="block2-img wrap-pic-w of-hidden pos-relative block2-labelnew">
-									<img src="{{ item.image.url }}" alt="IMG-PRODUCT" 
-								style="height: 360px;">
-
-									<!-- <div class="block2-overlay trans-0-4">
-										<a href="#" class="block2-btn-addwishlist hov-pointer trans-0-4">
-											<i class="icon-wishlist icon_heart_alt" aria-hidden="true"></i>
-											<i class="icon-wishlist icon_heart dis-none" aria-hidden="true"></i>
-										</a>
-
-										<div class="block2-btn-addcart w-size1 trans-0-4"> -->
-											<!-- Button -->
-											<!-- <button class="flex-c-m size1 bg4 bo-rad-23 hov1 s-text1 trans-0-4">
-												Add to Cart
-											</button> -->
-										<!-- </div>
-									</div> -->
-								</div>
+									<img src="{{ item.image.url }}" alt="{{ item.title }}">
 								</a>
+							</div>
 
-								<div class="block2-txt p-t-20">
-									<a href="{{item.get_absolute_url}}" class="block2-name dis-block s-text3 p-b-5">
+							<div class="product-info">
+								<div>
+									<a href="{{item.get_absolute_url}}" class="product-title">
 										{{item.title}}
 									</a>
-
-									<span class="block2-price m-text6 p-r-5">
+									<div class="product-price">
 										${{item.price}}
-									</span>
+									</div>
+								</div>
+								
+								<div class="product-footer">
+									<a href="{{item.get_absolute_url}}" class="btn-view-product">
+										View Product
+									</a>
 								</div>
 							</div>
 						</div>
-						{% endfor %}
-
-						
-
-						
-				
+					</div>
+					{% endfor %}
 				</div>
-				<!-- ---- row end ------- -->
 
-				<br>
 				<!-- Pagination -->
 				{% if is_paginated %}
-				<div class="pagination flex-m flex-w p-t-26">
+				<div class="modern-pagination">
 					{% if page_obj.has_previous %}
-					<a class="page-link" href="?page={{ page_obj.previous_page_number}}" aria-label="Previous">
-						<span aria-hidden="true">&laquo;</span>
-						<span class="sr-only">Previous</span>
-					</a>
+					<div class="page-item">
+						<a class="page-link page-arrow" href="?page={{ page_obj.previous_page_number}}" aria-label="Previous">
+							<span aria-hidden="true">&laquo;</span>
+							<span class="sr-only">Previous</span>
+						</a>
+					</div>
 					{% endif %}
-					<a href="?page={{ page_obj.number }}" class="item-pagination flex-c-m trans-0-4 active-pagination">{{page_obj.number}}</a>
 					
+					<div class="page-item">
+						<a href="?page={{ page_obj.number }}" class="page-link active">{{page_obj.number}}</a>
+					</div>
 					
 					{% if page_obj.has_next %}
-					<a class="page-link" href="?page={{ page_obj.next_page_number}}" aria-label="Next">
+					<div class="page-item">
+						<a class="page-link page-arrow" href="?page={{ page_obj.next_page_number}}" aria-label="Next">
 							<span aria-hidden="true">&raquo;</span>
 							<span class="sr-only">Next</span>
 						</a>
-						{% endif %}
+					</div>
+					{% endif %}
 				</div>
 				{% endif %}
 			</div>
 		</div>
-	</section>
+	</div>
+</section>
 
-
-		{% endblock content %}
+{% endblock content %}

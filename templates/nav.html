@@ -11,7 +11,346 @@
 	.topbar a:hover {
 		color: black;
 	}
+	
+	/* Enhanced navigation styling with fixes */
+	.header1 {
+		box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+		position: relative;
+		z-index: 100;
+	}
+	
+	.wrap_header {
+		height: 80px;
+		padding: 0 2rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	
+	@media (max-width: 768px) {
+		.wrap_header {
+			padding: 0 1rem;
+		}
+	}
+	
+	.logo {
+		display: flex;
+		align-items: center;
+		max-width: 180px;
+	}
+	
+	.logo p {
+		font-weight: 700;
+		letter-spacing: 1px;
+		transition: all 0.3s ease;
+		text-transform: uppercase;
+		margin-bottom: 0;
+	}
+	
+	.logo:hover p {
+		color: #717fe0;
+		transform: scale(1.02);
+	}
+	
+	.wrap_menu {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		flex-grow: 1;
+	}
+	
+	.menu {
+		width: 100%;
+	}
+	
+	.main_menu {
+		display: flex;
+		justify-content: flex-end;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	.main_menu > li {
+		display: inline-flex;
+		position: relative;
+	}
+	
+	.main_menu > li > a {
+		font-weight: 600;
+		text-transform: uppercase;
+		letter-spacing: 0.5px;
+		position: relative;
+		transition: all 0.3s ease;
+		padding: 15px 15px;
+		display: inline-block;
+		color: #333;
+		text-decoration: none;
+	}
+	
+	@media (min-width: 992px) and (max-width: 1200px) {
+		.main_menu > li > a {
+			padding: 15px 10px;
+			font-size: 0.9rem;
+		}
+	}
+	
+	.main_menu > li > a:after {
+		content: '';
+		position: absolute;
+		bottom: 10px;
+		left: 50%;
+		width: 0;
+		height: 2px;
+		background: #717fe0;
+		transition: all 0.3s ease;
+		transform: translateX(-50%);
+	}
+	
+	.main_menu > li > a:hover:after {
+		width: 50%;
+	}
+	
+	.main_menu > li > a:hover {
+		color: #717fe0;
+	}
+	
+	/* Fix dropdown positioning */
+	.main_menu > li {
+		position: relative;
+	}
+	
+	.sub_menu {
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 180px;
+		border-radius: 8px;
+		overflow: hidden;
+		box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+		border: 1px solid #e3e8ff;
+		padding: 0;
+		z-index: 100;
+		background-color: white;
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(15px);
+		transition: all 0.3s ease;
+	}
+	
+	.main_menu > li:hover .sub_menu {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
+	}
+	
+	.sub_menu li {
+		border-bottom: 1px solid #f0f3ff;
+		list-style: none;
+	}
+	
+	.sub_menu li:last-child {
+		border-bottom: none;
+	}
+	
+	.sub_menu li a {
+		padding: 12px 20px;
+		font-weight: 500;
+		transition: all 0.2s ease;
+		display: block;
+		color: #666;
+		text-decoration: none;
+	}
+	
+	.sub_menu li a:hover {
+		background-color: #f4f6ff;
+		color: #717fe0;
+		padding-left: 25px;
+	}
+	
+	/* Cart icon fix */
+	.header-wrapicon2 {
+		position: relative;
+	}
+	
+	.header-icons-noti {
+		position: absolute;
+		top: -10px;
+		right: -10px;
+		background: #717fe0;
+		color: white;
+		font-size: 12px;
+		font-weight: bold;
+		border-radius: 50%;
+		width: 22px;
+		height: 22px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		box-shadow: 0 3px 10px rgba(113,127,224,0.2);
+	}
+	
+	.header-icon1 {
+		max-width: 24px;
+		height: auto;
+	}
+	
+	/* Mobile styling improvements with new fixes */
+	.wrap_header_mobile {
+		height: 70px;
+		box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+		padding: 0 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+	}
+	
+	.logo-mobile {
+		display: flex;
+		align-items: center;
+	}
+	
+	.logo-mobile p {
+		margin-bottom: 0;
+	}
+	
+	.btn-show-menu {
+		display: flex;
+		align-items: center;
+	}
+	
+	.header-icons-mobile {
+		display: flex;
+		align-items: center;
+		margin-right: 1rem;
+	}
+	
+	.hamburger-inner, 
+	.hamburger-inner::before, 
+	.hamburger-inner::after {
+		background-color: #333;
+		height: 2px;
+	}
+	
+	.hamburger.is-active .hamburger-inner, 
+	.hamburger.is-active .hamburger-inner::before, 
+	.hamburger.is-active .hamburger-inner::after {
+		background-color: #717fe0;
+	}
+	
+	/* Fix mobile side menu positioning and visibility */
+	.wrap-side-menu {
+		position: fixed;
+		top: 0;
+		right: -100%;
+		width: 300px;
+		max-width: 80%;
+		height: 100vh;
+		background-color: white;
+		box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+		transition: all 0.4s ease;
+		z-index: 1000;
+		padding: 2rem 0;
+		overflow-y: auto;
+	}
+	
+	.wrap-side-menu.show {
+		right: 0;
+	}
+	
+	.side-menu {
+		width: 100%;
+	}
+	
+	.item-menu-mobile {
+		border-bottom: 1px solid #f0f3ff;
+	}
+	
+	.item-menu-mobile a {
+		font-weight: 500;
+		color: #333;
+		padding: 15px 1.5rem;
+		display: block;
+	}
+	
+	.item-menu-mobile:hover a {
+		color: #717fe0;
+		background-color: #f4f6ff;
+	}
+	
+	/* Fix for mobile dropdown */
+	.side-menu .sub-menu {
+		display: none;
+		padding-left: 1rem;
+		background: #f8faff;
+	}
+	
+	.side-menu .sub-menu.show {
+		display: block;
+	}
+	
+	.side-menu .sub-menu a {
+		padding: 12px 15px 12px 30px;
+	}
+	
+	.arrow-main-menu {
+		position: absolute;
+		right: 1.5rem;
+		top: 15px;
+		font-size: 1.2rem;
+		color: #717fe0;
+		transition: all 0.3s ease;
+	}
+	
+	.arrow-main-menu.active {
+		transform: rotate(90deg);
+	}
+	
+	/* Overlay when mobile menu is active */
+	.menu-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: rgba(0,0,0,0.5);
+		z-index: 999;
+		display: none;
+		opacity: 0;
+		transition: opacity 0.3s ease;
+	}
+	
+	.menu-overlay.show {
+		display: block;
+		opacity: 1;
+	}
+	
+	/* Close button for mobile menu */
+	.mobile-menu-close {
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		width: 30px;
+		height: 30px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		color: #333;
+		border-radius: 50%;
+		background: #f4f6ff;
+		cursor: pointer;
+		transition: all 0.3s ease;
+	}
+	
+	.mobile-menu-close:hover {
+		background: #e3e8ff;
+		color: #717fe0;
+	}
 </style>
+
+<!-- Menu overlay for mobile -->
+<div class="menu-overlay"></div>
+
 <!-- Header -->
 <header class="header1">
 	<!-- Header desktop -->
@@ -19,7 +358,7 @@
 		<div class="wrap_header">
 			<!-- Logo -->
 			<a href="/" class="logo">
-				<p style="color: black; "><b style="font-size: 22px;">F</b>leetFoot</p>
+				<p style="color: black; "><b style="font-size: 22px;">F</b>leet<b>F</b>oot</p>
 			</a>
 
 			<!-- Menu -->
@@ -28,7 +367,6 @@
 					<ul class="main_menu">
 						<li>
 							<a href="/">Home</a>
-
 						</li>
 
 						<li>
@@ -41,7 +379,6 @@
 						<li>
 							<div class="header-wrapicon2">
 								<a href="{% url 'core:order-summary' %}">
-
 									<img src="{% static 'images/icons/icon-header-02.png' %}"
 										class="header-icon1 js-show-header-dropdown" alt="ICON">
 									<span class="header-icons-noti">{{ request.user|cart_item_count }}</span>
@@ -63,15 +400,13 @@
 					</ul>
 				</nav>
 			</div>
-
-
 		</div>
 	</div>
 
 	<!-- Header Mobile -->
 	<div class="wrap_header_mobile">
-		<!-- Logo moblie -->
-		<a href="index.html" class="logo-mobile">
+		<!-- Logo mobile -->
+		<a href="/" class="logo-mobile">
 			<p style="color: black; "><b style="font-size: 22px;">F</b>leetFoot</p>
 		</a>
 
@@ -79,90 +414,16 @@
 		<div class="btn-show-menu">
 			<!-- Header Icon mobile -->
 			<div class="header-icons-mobile">
-				<a href="#" class="header-wrapicon1 dis-block">
+				{% if request.user.is_authenticated %}
+				<a href="{% url 'core:order-summary' %}" class="header-wrapicon1 dis-block">
+					<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1" alt="ICON">
+					<span class="header-icons-noti">{{ request.user|cart_item_count }}</span>
+				</a>
+				{% else %}
+				<a href="{% url 'account_login' %}" class="header-wrapicon1 dis-block">
 					<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
 				</a>
-
-				<span class="linedivide2"></span>
-
-				<div class="header-wrapicon2">
-					<img src="{% static 'images/icons/icon-header-02.png' %}"
-						class="header-icon1 js-show-header-dropdown" alt="ICON">
-					<span class="header-icons-noti">0</span>
-
-					<!-- Header cart noti -->
-					<div class="header-cart header-dropdown">
-						<ul class="header-cart-wrapitem">
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="{% static 'images/item-cart-01.jpg' %}" alt="IMG">
-								</div>
-
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										White Shirt With Pleat Detail Back
-									</a>
-
-									<span class="header-cart-item-info">
-										1 x $19.00
-									</span>
-								</div>
-							</li>
-
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="{% static 'images/item-cart-02.jpg' %}" alt="IMG">
-								</div>
-
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										Converse All Star Hi Black Canvas
-									</a>
-
-									<span class="header-cart-item-info">
-										1 x $39.00
-									</span>
-								</div>
-							</li>
-
-							<li class="header-cart-item">
-								<div class="header-cart-item-img">
-									<img src="{% static 'images/item-cart-03.jpg' %}" alt="IMG">
-								</div>
-
-								<div class="header-cart-item-txt">
-									<a href="#" class="header-cart-item-name">
-										Nixon Porter Leather Watch In Tan
-									</a>
-
-									<span class="header-cart-item-info">
-										1 x $17.00
-									</span>
-								</div>
-							</li>
-						</ul>
-
-						<div class="header-cart-total">
-							Total: $75.00
-						</div>
-
-						<div class="header-cart-buttons">
-							<div class="header-cart-wrapbtn">
-								<!-- Button -->
-								<a href="cart.html" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-									View Cart
-								</a>
-							</div>
-
-							<div class="header-cart-wrapbtn">
-								<!-- Button -->
-								<a href="#" class="flex-c-m size1 bg1 bo-rad-20 hov1 s-text1 trans-0-4">
-									Check Out
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
+				{% endif %}
 			</div>
 
 			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
@@ -175,6 +436,11 @@
 
 	<!-- Menu Mobile -->
 	<div class="wrap-side-menu">
+		<!-- Close button -->
+		<div class="mobile-menu-close">
+			<i class="fa fa-times"></i>
+		</div>
+		
 		<nav class="side-menu">
 			<ul class="main-menu">
 				<li class="item-menu-mobile">
@@ -190,7 +456,7 @@
 				{% if request.user.is_authenticated %}
 				<li class="item-menu-mobile">
 					<a href="{% url 'core:order-summary' %}">Cart<span
-							class="badge badge-dark">{{ request.user|cart_item_count }}</span></a>
+							class="badge badge-primary ml-2">{{ request.user|cart_item_count }}</span></a>
 				</li>
 				<li class="item-menu-mobile">
 					<a href="{% url 'account_logout' %}">Logout</a>
@@ -205,8 +471,53 @@
 					<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 				</li>
 				{% endif %}
-
 			</ul>
 		</nav>
 	</div>
 </header>
+
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+		// Mobile menu toggle
+		const hamburger = document.querySelector('.btn-show-menu-mobile');
+		const sideMenu = document.querySelector('.wrap-side-menu');
+		const menuOverlay = document.querySelector('.menu-overlay');
+		const closeButton = document.querySelector('.mobile-menu-close');
+		
+		hamburger.addEventListener('click', function() {
+			this.classList.toggle('is-active');
+			sideMenu.classList.toggle('show');
+			menuOverlay.classList.toggle('show');
+			document.body.style.overflow = sideMenu.classList.contains('show') ? 'hidden' : '';
+		});
+		
+		menuOverlay.addEventListener('click', function() {
+			hamburger.classList.remove('is-active');
+			sideMenu.classList.remove('show');
+			this.classList.remove('show');
+			document.body.style.overflow = '';
+		});
+		
+		closeButton.addEventListener('click', function() {
+			hamburger.classList.remove('is-active');
+			sideMenu.classList.remove('show');
+			menuOverlay.classList.remove('show');
+			document.body.style.overflow = '';
+		});
+		
+		// Mobile dropdown toggle
+		const mobileDropdownItems = document.querySelectorAll('.item-menu-mobile:has(.sub-menu)');
+		const arrowMainMenu = document.querySelectorAll('.arrow-main-menu');
+		
+		arrowMainMenu.forEach(function(arrow, index) {
+			arrow.addEventListener('click', function(e) {
+				e.preventDefault();
+				e.stopPropagation();
+				this.classList.toggle('active');
+				
+				const subMenu = this.previousElementSibling;
+				subMenu.classList.toggle('show');
+			});
+		});
+	});
+</script>

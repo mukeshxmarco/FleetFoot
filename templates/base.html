@@ -6,45 +6,381 @@
   <title>{% block head_title %}{% endblock %}</title>
   {% block extra_head %} {% endblock %}
   <style type="text/css">
+    /* Global styles for improved UI */
+    :root {
+      --primary-color: #717fe0;
+      --primary-dark: #5c6bc0;
+      --primary-light: #f4f6ff;
+      --dark-text: #333;
+      --light-text: #717171;
+      --border-color: #e3e8ff;
+      --danger: #ff6b6b;
+      --success: #66bb6a;
+      --warning: #ffb347;
+      --info: #4fc3f7;
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--dark-text);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Improved form controls */
     .form-control {
-    display: block;
-    width: 100%;
-    height: calc(1.5em + .75rem + 2px);
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da !important;
-    border-radius: .25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
+      display: block;
+      width: 100%;
+      height: calc(1.5em + 0.95rem + 2px);
+      padding: 0.475rem 1rem;
+      font-size: 1rem;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #495057;
+      background-color: #fff;
+      background-clip: padding-box;
+      border: 2px solid var(--border-color) !important;
+      border-radius: 0.5rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color) !important;
+      box-shadow: 0 0 0 0.2rem rgba(113, 127, 224, 0.15);
+      background-color: var(--primary-light);
+      outline: none;
+    }
+    
+    /* Fix for select and input height inconsistencies */
+    select.form-control {
+      height: calc(1.5em + 1.1rem + 2px);
+      padding-top: 0.4rem;
+      padding-bottom: 0.4rem;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23717fe0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.7rem center;
+      background-size: 1rem;
+      padding-right: 2.5rem;
+    }
+    
+    /* Fix for buttons with icons */
+    .btn i, .btn .fa, .btn .fas, .btn .fab {
+      margin-right: 0.5rem;
+    }
+
+    /* Card styles */
+    .card {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+      border: 1px solid var(--border-color);
+      height: 100%; /* Fix for uneven card heights */
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .card-img-top {
+      height: 220px;
+      object-fit: cover;
+    }
+    
+    .card-body {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    
+    .card-text {
+      flex-grow: 1;
+    }
+
+    /* Button styles with improved responsive behavior */
+    .btn {
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      border: none;
+      white-space: normal; /* Allow text wrapping on small screens */
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      box-shadow: 0 4px 15px rgba(113,127,224,0.2);
+      color: white;
+    }
+
+    .btn-primary:hover, .btn-primary:focus {
+      background: linear-gradient(90deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 18px rgba(113,127,224,0.25);
+      color: white;
+    }
+    
+    /* Fix for buttons on small screens */
+    @media (max-width: 576px) {
+      .btn {
+        padding: 0.4rem 1.2rem;
+        font-size: 0.85rem;
+      }
+      
+      .container {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+    }
+
+    /* Alert styles */
+    .alert {
+      border-radius: 10px;
+      border: none;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+      margin-bottom: 1rem;
+      padding: 1rem 1.25rem;
+    }
+
+    .alert-success {
+      background-color: #e7f9ef;
+      color: var(--success);
+    }
+
+    .alert-danger {
+      background-color: #ffeeee;
+      color: var(--danger);
+    }
+
+    .alert-warning {
+      background-color: #fff8e6;
+      color: var(--warning);
+    }
+
+    .alert-info {
+      background-color: #e6f7ff;
+      color: var(--info);
+    }
+    
+    /* Fix for alert button alignment */
+    .alert .close {
+      padding: 0.25rem 0.6rem;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      margin-top: -0.2rem;
+      opacity: 0.8;
+      transition: all 0.2s ease;
+    }
+    
+    .alert .close:hover {
+      opacity: 1;
+      background: rgba(255,255,255,0.8);
+    }
+
+    /* Section spacing - with responsive adjustments */
+    .section-gap {
+      padding: 5rem 0;
+    }
+    
+    @media (max-width: 768px) {
+      .section-gap {
+        padding: 3rem 0;
+      }
+    }
+
+    .section-gap-sm {
+      padding: 3rem 0;
+    }
+    
+    @media (max-width: 768px) {
+      .section-gap-sm {
+        padding: 2rem 0;
+      }
+    }
+
+    /* Text styles with improved responsive behavior */
+    .section-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+    
+    @media (max-width: 768px) {
+      .section-title {
+        font-size: 1.5rem;
+      }
+    }
+
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--primary-color);
+    }
+    
+    /* Text sizes and spacing for mobile */
+    @media (max-width: 576px) {
+      h1, .h1 {
+        font-size: 1.8rem;
+      }
+      
+      h2, .h2 {
+        font-size: 1.5rem;
+      }
+      
+      h3, .h3 {
+        font-size: 1.3rem;
+      }
+      
+      p, .p {
+        font-size: 0.95rem;
+      }
+      
+      .section-title:after {
+        width: 40px;
+        height: 2px;
+      }
+    }
+    
+    /* Animations with fixed issues for mobile */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .animate-fade-in-up {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+    
+    /* Badge Styles */
+    .badge {
+      padding: 0.35em 0.65em;
+      font-weight: 600;
+      border-radius: 50px;
+      font-size: 0.75em;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .badge-primary {
+      background-color: var(--primary-color);
+      color: white;
+    }
+    
+    /* Custom scrollbar - with mobile compatibility */
+    @media (min-width: 768px) {
+      ::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      
+      ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+      }
+      
+      ::-webkit-scrollbar-thumb {
+        background: #c1c9f8;
+        border-radius: 10px;
+      }
+      
+      ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
+      }
+    }
+    
+    /* Image responsiveness fix */
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    /* Fix for padding and margin consistencies */
+    .container {
+      padding: 0 15px;
+    }
+    
+    .row {
+      margin-left: -15px;
+      margin-right: -15px;
+    }
+    
+    [class*="col-"] {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    
+    /* Fix for links */
+    a {
+      color: var(--primary-color);
+      transition: all 0.3s ease;
+    }
+    
+    a:hover {
+      color: var(--primary-dark);
+      text-decoration: none;
+    }
+    
+    /* Fix for outlines */
+    *:focus {
+      outline-color: var(--primary-color);
+    }
+    
+    /* Fix for message container */
+    .messages-container {
+      padding: 1rem;
+      max-width: 100%;
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      z-index: 1050;
+      width: 350px;
+      max-width: 90%;
+    }
+    
+    @media (max-width: 576px) {
+      .messages-container {
+        width: 100%;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 0.5rem;
+      }
+    }
   </style>
   <body class="animsition">
     {% include "nav.html"%}
-    <div class="mt-2">
-      {% if messages %} {% for message in messages %}
-      <div
-        class="alert alert-{{ message.tags }} alert-dismissible fade show"
-        role="alert"
-      >
-        {{ message }}
-
-        <button
-          type="button"
-          class="close"
-          data-dismiss="alert"
-          aria-label="Close"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+    <div class="messages-container">
+      {% if messages %} 
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }} alert-dismissible fade show animate-fade-in-up" role="alert">
+            {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        {% endfor %} 
+      {% endif %}
     </div>
-
-    {% endfor %} 
-    {% endif %} 
 
     {% block content %} 
     {% endblock content %}

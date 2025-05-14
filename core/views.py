@@ -163,6 +163,7 @@ class CheckoutView(View):
                 'cities': CITIES_LIST,
                 'couponform': CouponForm(),
                 'order': order,
+                'object': order,  # Add this to make cart items visible in the template
                 'DISPLAY_COUPON_FORM': True,
             }
             return render(self.request, "checkout.html", context)
@@ -210,6 +211,7 @@ class CheckoutView(View):
                     'cities': CITIES_LIST,
                     'couponform': CouponForm(),
                     'order': order,
+                    'object': order,  # Add this to make cart items visible in template
                     'DISPLAY_COUPON_FORM': True,
                 }
                 return render(self.request, "checkout.html", context)

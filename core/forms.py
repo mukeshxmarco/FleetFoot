@@ -10,12 +10,37 @@ PAYMENT_CHOICES = (
 
 
 class CheckoutForm(forms.Form):
-    street_address = forms.CharField(required=True)
-    apartment_address = forms.CharField(required=False)
-    city = forms.ChoiceField(choices=[(c['value'], c['label']) for c in CITIES_LIST], required=True)
-    zip = forms.CharField(required=True)
+    street_address = forms.CharField(
+        required=True, 
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter your street address'
+        })
+    )
+    apartment_address = forms.CharField(
+        required=False,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter apartment, suite, unit, etc.'
+        })
+    )
+    city = forms.ChoiceField(
+        choices=[(c['value'], c['label']) for c in CITIES_LIST], 
+        required=True,
+        widget=forms.Select(attrs={
+            'class': 'form-control'
+        })
+    )
+    zip = forms.CharField(
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control',
+            'placeholder': 'Enter postal code'
+        })
+    )
     payment_option = forms.ChoiceField(
-        widget=forms.RadioSelect, choices=[('S', 'Stripe'), ('P', 'Paypal')]
+        widget=forms.RadioSelect, 
+        choices=[('S', 'Stripe'), ('P', 'Paypal')]
     )
 
 
