@@ -181,6 +181,49 @@
   .newsletter-btn:hover {
     background: linear-gradient(90deg, #5c6bc0 0%, #717fe0 100%);
   }
+
+  @media (max-width: 768px) {
+    #footer-main .row {
+      flex-direction: column;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .footer-links {
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+  }
+  @media (max-width: 576px) {
+    #footer-main {
+      padding: 2rem 0 0.5rem;
+    }
+    .footer-heading {
+      font-size: 1rem;
+      padding-bottom: 0.5rem;
+    }
+    .social-icons {
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .social-icon {
+      width: 32px;
+      height: 32px;
+      margin-right: 0.5rem;
+    }
+    .newsletter-form {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .newsletter-btn {
+      width: 100%;
+      border-radius: 4px;
+      margin-top: 0.5rem;
+    }
+  }
 </style>
 
 <footer id="footer-main">

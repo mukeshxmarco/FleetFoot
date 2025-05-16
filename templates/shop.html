@@ -279,6 +279,116 @@
 		width: 40px;
 		height: 40px;
 	}
+
+	@media (max-width: 992px) {
+		.shop-header h2 {
+			font-size: 2rem;
+		}
+		.shop-header p {
+			font-size: 1rem;
+		}
+		.filter-card {
+			padding: 1rem;
+		}
+		.product-info {
+			padding: 1rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.shop-header {
+			padding: 40px 0;
+			border-radius: 0 0 15px 15px;
+		}
+		.product-img img {
+			height: 180px;
+		}
+		.product-card {
+			margin-bottom: 1rem;
+		}
+		.product-info {
+			padding: 0.7rem;
+		}
+		.product-title {
+			font-size: 1rem;
+		}
+		.product-price {
+			font-size: 1rem;
+		}
+		.btn-view-product {
+			padding: 0.4rem 1rem;
+			font-size: 0.8rem;
+		}
+		.filter-card {
+			margin-bottom: 1rem;
+		}
+	}
+
+	@media (max-width: 576px) {
+		.shop-header {
+			padding: 25px 0;
+			border-radius: 0 0 8px 8px;
+		}
+		.shop-header h2 {
+			font-size: 1.3rem;
+		}
+		.shop-header p {
+			font-size: 0.9rem;
+		}
+		.product-img img {
+			height: 120px;
+		}
+		.product-card {
+			border-radius: 8px;
+			box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+		}
+		.product-info {
+			padding: 0.5rem;
+		}
+		.product-title {
+			font-size: 0.95rem;
+		}
+		.product-price {
+			font-size: 0.95rem;
+		}
+		.btn-view-product {
+			padding: 0.3rem 0.7rem;
+			font-size: 0.75rem;
+		}
+		.filter-card {
+			padding: 0.7rem;
+			border-radius: 8px;
+		}
+		.row > [class*='col-'] {
+			padding-left: 5px;
+			padding-right: 5px;
+		}
+		.modern-pagination {
+			margin-top: 1.5rem;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.sidebar-mobile-toggle {
+			display: block;
+			margin-bottom: 1rem;
+			background: #717fe0;
+			color: #fff;
+			border: none;
+			border-radius: 30px;
+			padding: 0.5rem 1.2rem;
+			font-size: 1rem;
+			font-weight: 600;
+			box-shadow: 0 2px 8px rgba(113,127,224,0.12);
+		}
+		.sidebar-mobile {
+			display: none;
+		}
+		.sidebar-mobile.active {
+			display: block;
+			margin-bottom: 1rem;
+		}
+	}
 </style>
 
 <!-- Title Page -->
@@ -297,104 +407,107 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-sm-12 col-md-4 col-lg-3 p-b-50">
-				<div class="filter-card">
-					<h4 class="filter-title">
-						Categories
-					</h4>
+				<button class="sidebar-mobile-toggle d-md-none" onclick="document.querySelector('.sidebar-mobile').classList.toggle('active')">Show Filters</button>
+				<div class="sidebar-mobile">
+					<div class="filter-card">
+						<h4 class="filter-title">
+							Categories
+						</h4>
 
-					<ul class="category-list">
-						<li>
-							<a href="/shop" class="s-text13 active1">
-								All Products
-							</a>
-						</li>
+						<ul class="category-list">
+							<li>
+								<a href="/shop" class="s-text13 active1">
+									All Products
+								</a>
+							</li>
 
-						{% categories_li_a %}
-					</ul>
-				</div>
-
-				<!-- Search -->
-				<div class="filter-card">
-					<h4 class="filter-title">
-						Search Products
-					</h4>
-
-					<div class="search-product pos-relative of-hidden">
-						<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
-
-						<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
-							<i class="fs-12 fa fa-search" aria-hidden="true"></i>
-						</button>
+							{% categories_li_a %}
+						</ul>
 					</div>
-				</div>
 
-				<!--  Filters -->
-				<div class="filter-card">
-					<h4 class="filter-title">
-						Price Range
-					</h4>
+					<!-- Search -->
+					<div class="filter-card">
+						<h4 class="filter-title">
+							Search Products
+						</h4>
 
-					<div class="filter-price p-t-10 p-b-30">
-						<div class="wra-filter-bar">
-							<div id="filter-bar"></div>
+						<div class="search-product pos-relative of-hidden">
+							<input class="s-text7 size6 p-l-23 p-r-50" type="text" name="search-product" placeholder="Search Products...">
+
+							<button class="flex-c-m size5 ab-r-m color2 color0-hov trans-0-4">
+								<i class="fs-12 fa fa-search" aria-hidden="true"></i>
+							</button>
 						</div>
+					</div>
 
-						<div class="flex-sb-m flex-w p-t-16">
-							<div class="w-full">
-								<span class="s-text3 p-t-10 p-b-10 d-block mb-3">
-									Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
-								</span>
-								<!-- Button -->
-								<button class="btn-view-product w-100">
-									Apply Filter
-								</button>
+					<!--  Filters -->
+					<div class="filter-card">
+						<h4 class="filter-title">
+							Price Range
+						</h4>
+
+						<div class="filter-price p-t-10 p-b-30">
+							<div class="wra-filter-bar">
+								<div id="filter-bar"></div>
+							</div>
+
+							<div class="flex-sb-m flex-w p-t-16">
+								<div class="w-full">
+									<span class="s-text3 p-t-10 p-b-10 d-block mb-3">
+										Range: $<span id="value-lower">610</span> - $<span id="value-upper">980</span>
+									</span>
+									<!-- Button -->
+									<button class="btn-view-product w-100">
+										Apply Filter
+									</button>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<!-- Color Filter -->
-				<div class="filter-card">
-					<h4 class="filter-title">
-						Color
-					</h4>
+					<!-- Color Filter -->
+					<div class="filter-card">
+						<h4 class="filter-title">
+							Color
+						</h4>
 
-					<ul class="flex-w p-t-10">
-						<li class="m-r-10 m-b-10">
-							<input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
-							<label class="color-filter color-filter1" for="color-filter1"></label>
-						</li>
+						<ul class="flex-w p-t-10">
+							<li class="m-r-10 m-b-10">
+								<input class="checkbox-color-filter" id="color-filter1" type="checkbox" name="color-filter1">
+								<label class="color-filter color-filter1" for="color-filter1"></label>
+							</li>
 
-						<li class="m-r-10 m-b-10">
-							<input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
-							<label class="color-filter color-filter2" for="color-filter2"></label>
-						</li>
+							<li class="m-r-10 m-b-10">
+								<input class="checkbox-color-filter" id="color-filter2" type="checkbox" name="color-filter2">
+								<label class="color-filter color-filter2" for="color-filter2"></label>
+							</li>
 
-						<li class="m-r-10 m-b-10">
-							<input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
-							<label class="color-filter color-filter3" for="color-filter3"></label>
-						</li>
+							<li class="m-r-10 m-b-10">
+								<input class="checkbox-color-filter" id="color-filter3" type="checkbox" name="color-filter3">
+								<label class="color-filter color-filter3" for="color-filter3"></label>
+							</li>
 
-						<li class="m-r-10 m-b-10">
-							<input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
-							<label class="color-filter color-filter4" for="color-filter4"></label>
-						</li>
+							<li class="m-r-10 m-b-10">
+								<input class="checkbox-color-filter" id="color-filter4" type="checkbox" name="color-filter4">
+								<label class="color-filter color-filter4" for="color-filter4"></label>
+							</li>
 
-						<li class="m-r-10 m-b-10">
-							<input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
-							<label class="color-filter color-filter5" for="color-filter5"></label>
-						</li>
+							<li class="m-r-10 m-b-10">
+								<input class="checkbox-color-filter" id="color-filter5" type="checkbox" name="color-filter5">
+								<label class="color-filter color-filter5" for="color-filter5"></label>
+							</li>
 
-						<li class="m-r-10 m-b-10">
-							<input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
-							<label class="color-filter color-filter6" for="color-filter6"></label>
-						</li>
+							<li class="m-r-10 m-b-10">
+								<input class="checkbox-color-filter" id="color-filter6" type="checkbox" name="color-filter6">
+								<label class="color-filter color-filter6" for="color-filter6"></label>
+							</li>
 
-						<li class="m-r-10 m-b-10">
-							<input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
-							<label class="color-filter color-filter7" for="color-filter7"></label>
-						</li>
-					</ul>
+							<li class="m-r-10 m-b-10">
+								<input class="checkbox-color-filter" id="color-filter7" type="checkbox" name="color-filter7">
+								<label class="color-filter color-filter7" for="color-filter7"></label>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 
@@ -436,7 +549,7 @@
 				<!-- Product Grid -->
 				<div class="row">
 					{% for item in object_list %}
-					<div class="col-sm-12 col-md-6 col-lg-4 mb-4">
+					<div class="col-12 col-sm-12 col-md-6 col-lg-4 mb-4">
 						<div class="product-card">
 							<div class="product-img">
 								<a href="{{item.get_absolute_url}}">
