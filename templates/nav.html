@@ -313,7 +313,6 @@
 		left: 0;
 		width: 100%;
 		height: 100%;
-		background: rgba(0,0,0,0.5);
 		z-index: 999;
 		display: none;
 		opacity: 0;
@@ -340,6 +339,7 @@
 		background: #f4f6ff;
 		cursor: pointer;
 		transition: all 0.3s ease;
+		z-index: 1001;
 	}
 	
 	.mobile-menu-close:hover {
@@ -483,38 +483,38 @@
 		const sideMenu = document.querySelector('.wrap-side-menu');
 		const menuOverlay = document.querySelector('.menu-overlay');
 		const closeButton = document.querySelector('.mobile-menu-close');
-		
+
+		let isMenuOpen = false; // Track menu state
+
+		const toggleMenu = (state) => {
+			isMenuOpen = state;
+			hamburger.classList.toggle('is-active', isMenuOpen);
+			sideMenu.classList.toggle('show', isMenuOpen);
+			menuOverlay.classList.toggle('show', isMenuOpen);
+			document.body.style.overflow = isMenuOpen ? 'hidden' : '';
+		};
+
 		hamburger.addEventListener('click', function() {
-			this.classList.toggle('is-active');
-			sideMenu.classList.toggle('show');
-			menuOverlay.classList.toggle('show');
-			document.body.style.overflow = sideMenu.classList.contains('show') ? 'hidden' : '';
+			toggleMenu(true);
 		});
-		
+
 		menuOverlay.addEventListener('click', function() {
-			hamburger.classList.remove('is-active');
-			sideMenu.classList.remove('show');
-			this.classList.remove('show');
-			document.body.style.overflow = '';
+			toggleMenu(false);
 		});
-		
+
 		closeButton.addEventListener('click', function() {
-			hamburger.classList.remove('is-active');
-			sideMenu.classList.remove('show');
-			menuOverlay.classList.remove('show');
-			document.body.style.overflow = '';
+			toggleMenu(false);
 		});
-		
+
 		// Mobile dropdown toggle
-		const mobileDropdownItems = document.querySelectorAll('.item-menu-mobile:has(.sub-menu)');
 		const arrowMainMenu = document.querySelectorAll('.arrow-main-menu');
-		
-		arrowMainMenu.forEach(function(arrow, index) {
+
+		arrowMainMenu.forEach(function(arrow) {
 			arrow.addEventListener('click', function(e) {
 				e.preventDefault();
 				e.stopPropagation();
 				this.classList.toggle('active');
-				
+
 				const subMenu = this.previousElementSibling;
 				subMenu.classList.toggle('show');
 			});
