@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<style>
+  .orders-table {
+    width: 100%;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    margin: 2rem 0;
+    overflow-x: auto;
+  }
+  .orders-table th, .orders-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #f0f3ff;
+  }
+  .orders-table th {
+    background: #f8faff;
+    font-weight: 700;
+    color: #333;
+  }
+  .orders-table tr:last-child td {
+    border-bottom: none;
+  }
+  .order-status {
+    font-weight: 600;
+    color: #717fe0;
+    text-transform: capitalize;
+  }
+  @media (max-width: 768px) {
+    .orders-table th, .orders-table td {
+      padding: 0.7rem;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+<div class="container">
+  <h2 class="mt-4 mb-4">My Orders</h2>
+  <div class="orders-table-wrapper">
+    <table class="orders-table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Order Code</th>
+          <th>Items</th>
+          <th>Total</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for order in orders %}
+        <tr>
+          <td>{{ forloop.counter }}</td>
+          <td>{{ order.ordered_date|date:'d M Y' }}</td>
+          <td>{{ order.ref_code }}</td>
+          <td>
+            <ul style="margin:0; padding-left: 1rem;">
+              {% for item in order.items.all %}
+                <li>{{ item.item.title }} (x{{ item.quantity }})</li>
+              {% endfor %}
+            </ul>
+          </td>
+          <td>₹{{ order.get_total }}</td>
+          <td class="order-status">Completed</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="6">You have not placed any orders yet.</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% if is_paginated %}
+      <div class="modern-pagination mt-4">
+        {% if page_obj.has_previous %}
+          <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo;</a>
+        {% endif %}
+        <span class="page-link active">{{ page_obj.number }}</span>
+        {% if page_obj.has_next %}
+          <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

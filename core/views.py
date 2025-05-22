@@ -196,10 +196,13 @@ class CheckoutView(View):
                 order.billing_address = billing_address
                 order.save()
 
-                if payment_option == 'S':
-                    return redirect('core:payment', payment_option='stripe')
-                elif payment_option == 'P':
-                    return redirect('core:payment', payment_option='paypal')
+                if payment_option == 'C':
+                    # Mark order as ordered for COD
+                    order.ordered = True
+                    order.ref_code = create_ref_code()
+                    order.save()
+                    messages.success(self.request, "Order placed successfully with Cash on Delivery.")
+                    return redirect("core:order-summary")
                 else:
                     messages.warning(
                         self.request, "Invalid payment option select")
@@ -355,7 +358,7 @@ class AddCouponView(View):
                 return redirect("core:checkout")
 
             except ObjectDoesNotExist:
-                messages.info(request, "You do not have an active order")
+                messages.info(self.request, "You do not have an active order")
                 return redirect("core:checkout")
 
 
@@ -392,3 +395,13 @@ class RequestRefundView(View):
             except ObjectDoesNotExist:
                 messages.info(self.request, "This order does not exist")
                 return redirect("core:request-refund")
+
+
+class MyOrdersView(LoginRequiredMixin, ListView):
+    model = Order
+    template_name = "my_orders.html"
+    context_object_name = "orders"
+    paginate_by = 10
+
+    def get_queryset(self):
+        return Order.objects.filter(user=self.request.user, ordered=True).order_by('-ordered_date')

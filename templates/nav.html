@@ -386,6 +386,9 @@
 							</div>
 						</li>
 						<li>
+							<a href="{% url 'core:my-orders' %}">My Orders</a>
+						</li>
+						<li>
 							<a href="{% url 'account_logout' %}">Logout</a>
 						</li>
 						{% else %}
@@ -457,6 +460,9 @@
 				<li class="item-menu-mobile">
 					<a href="{% url 'core:order-summary' %}">Cart<span
 							class="badge badge-primary ml-2">{{ request.user|cart_item_count }}</span></a>
+				</li>
+				<li class="item-menu-mobile">
+					<a href="{% url 'core:my-orders' %}">My Orders</a>
 				</li>
 				<li class="item-menu-mobile">
 					<a href="{% url 'account_logout' %}">Logout</a>

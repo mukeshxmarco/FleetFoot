@@ -388,19 +388,10 @@
             </div>
             
             <div class="payment-options">
-              {% for value, name in form.fields.payment_option.choices %}
-              <label class="payment-option {% if forloop.first %}active{% endif %}">
-                <input type="radio" name="payment_option" value="{{ value }}" class="payment-radio" {% if forloop.first %}checked{% endif %}>
-                <span class="payment-name">{{ name }}</span>
-                {% if value == "S" %}
-                <img src="{% static 'images/stripe-logo.png' %}" alt="Stripe" class="payment-logo" 
-                     onerror="this.onerror=null; this.src='https://stripe.com/img/v3/home/social.png';">
-                {% elif value == "P" %}
-                <img src="{% static 'images/paypal-logo.png' %}" alt="PayPal" class="payment-logo"
-                     onerror="this.onerror=null; this.src='https://www.paypalobjects.com/webstatic/en_US/i/buttons/PP_logo_h_100x26.png';">
-                {% endif %}
+              <label class="payment-option active">
+                <input type="radio" name="payment_option" value="C" class="payment-radio" checked>
+                <span class="payment-name">Cash on Delivery</span>
               </label>
-              {% endfor %}
             </div>
           </div>
           
@@ -431,7 +422,7 @@
                 <div class="product-quantity">Quantity: {{ order_item.quantity }}</div>
               </div>
             </div>
-            <div class="product-price">${{ order_item.get_final_price }}</div>
+            <div class="product-price">₹{{ order_item.get_final_price }}</div>
           </div>
           {% empty %}
           <div class="summary-item">
@@ -442,10 +433,10 @@
         
         <!-- Totals Section -->
         <div class="summary-totals">
-          <div class="total-row">
+          {% comment %} <div class="total-row">
             <div class="total-label">Subtotal</div>
-            <div class="total-value">${{ object.get_subtotal }}</div>
-          </div>
+            <div class="total-value">₹{{ object.get_subtotal }}</div>
+          </div> {% endcomment %}
           
           {% if object.coupon %}
           <div class="total-row">
@@ -454,16 +445,14 @@
           </div>
           {% endif %}
           
-          {% if object.get_total %}
           <div class="total-row">
-            <div class="total-label">Shipping</div>
-            <div class="total-value">{% if object.get_total|floatformat:2 > 50.00 %}Free{% else %}$10.00{% endif %}</div>
+            <div class="total-label">Delivery Charges</div>
+            <div class="total-value">₹50</div>
           </div>
-          {% endif %}
           
           <div class="total-row grand-total">
             <div class="total-label">Total</div>
-            <div class="total-value">${{ object.get_total }}</div>
+            <div class="total-value">₹{{ object.get_total|add:50 }}</div>
           </div>
         </div>
         
