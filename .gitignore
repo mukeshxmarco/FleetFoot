@@ -4,7 +4,7 @@ venv
 **/__pycache__
 media
 .DS_Store
-#*.sqlite3 demo db
+*.sqlite3
 *.env
 
 # Accept these files in the repository

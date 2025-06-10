@@ -3,6 +3,7 @@
 {% load category_template_tags %}
 
 <style>
+	/* Core styling for desktop navigation */
 	.topbar {
 		background-color: white;
 		color: black !important;
@@ -11,14 +12,13 @@
 	.topbar a:hover {
 		color: black;
 	}
-	
-	/* Enhanced navigation styling with fixes */
+
 	.header1 {
-		box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+		box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
 		position: relative;
 		z-index: 100;
 	}
-	
+
 	.wrap_header {
 		height: 80px;
 		padding: 0 2rem;
@@ -26,19 +26,19 @@
 		align-items: center;
 		justify-content: space-between;
 	}
-	
+
 	@media (max-width: 768px) {
 		.wrap_header {
 			padding: 0 1rem;
 		}
 	}
-	
+
 	.logo {
 		display: flex;
 		align-items: center;
 		max-width: 180px;
 	}
-	
+
 	.logo p {
 		font-weight: 700;
 		letter-spacing: 1px;
@@ -46,23 +46,24 @@
 		text-transform: uppercase;
 		margin-bottom: 0;
 	}
-	
+
 	.logo:hover p {
 		color: #717fe0;
 		transform: scale(1.02);
 	}
-	
+
+	/* Desktop Menu Styling */
 	.wrap_menu {
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
 		flex-grow: 1;
 	}
-	
+
 	.menu {
 		width: 100%;
 	}
-	
+
 	.main_menu {
 		display: flex;
 		justify-content: flex-end;
@@ -70,13 +71,13 @@
 		padding: 0;
 		list-style: none;
 	}
-	
-	.main_menu > li {
+
+	.main_menu>li {
 		display: inline-flex;
 		position: relative;
 	}
-	
-	.main_menu > li > a {
+
+	.main_menu>li>a {
 		font-weight: 600;
 		text-transform: uppercase;
 		letter-spacing: 0.5px;
@@ -87,15 +88,15 @@
 		color: #333;
 		text-decoration: none;
 	}
-	
+
 	@media (min-width: 992px) and (max-width: 1200px) {
-		.main_menu > li > a {
+		.main_menu>li>a {
 			padding: 15px 10px;
 			font-size: 0.9rem;
 		}
 	}
-	
-	.main_menu > li > a:after {
+
+	.main_menu>li>a:after {
 		content: '';
 		position: absolute;
 		bottom: 10px;
@@ -106,20 +107,19 @@
 		transition: all 0.3s ease;
 		transform: translateX(-50%);
 	}
-	
-	.main_menu > li > a:hover:after {
+
+	.main_menu>li>a:hover:after {
 		width: 50%;
 	}
-	
-	.main_menu > li > a:hover {
+
+	.main_menu>li>a:hover {
 		color: #717fe0;
 	}
-	
-	/* Fix dropdown positioning */
-	.main_menu > li {
+
+	.main_menu>li {
 		position: relative;
 	}
-	
+
 	.sub_menu {
 		position: absolute;
 		top: 100%;
@@ -127,7 +127,7 @@
 		min-width: 180px;
 		border-radius: 8px;
 		overflow: hidden;
-		box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+		box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 		border: 1px solid #e3e8ff;
 		padding: 0;
 		z-index: 100;
@@ -137,22 +137,22 @@
 		transform: translateY(15px);
 		transition: all 0.3s ease;
 	}
-	
-	.main_menu > li:hover .sub_menu {
+
+	.main_menu>li:hover .sub_menu {
 		opacity: 1;
 		visibility: visible;
 		transform: translateY(0);
 	}
-	
+
 	.sub_menu li {
 		border-bottom: 1px solid #f0f3ff;
 		list-style: none;
 	}
-	
+
 	.sub_menu li:last-child {
 		border-bottom: none;
 	}
-	
+
 	.sub_menu li a {
 		padding: 12px 20px;
 		font-weight: 500;
@@ -161,18 +161,18 @@
 		color: #666;
 		text-decoration: none;
 	}
-	
+
 	.sub_menu li a:hover {
 		background-color: #f4f6ff;
 		color: #717fe0;
 		padding-left: 25px;
 	}
-	
-	/* Cart icon fix */
+
+	/* Cart icon styling */
 	.header-wrapicon2 {
 		position: relative;
 	}
-	
+
 	.header-icons-noti {
 		position: absolute;
 		top: -10px;
@@ -187,169 +187,316 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		box-shadow: 0 3px 10px rgba(113,127,224,0.2);
+		box-shadow: 0 3px 10px rgba(113, 127, 224, 0.2);
 	}
-	
+
 	.header-icon1 {
 		max-width: 24px;
 		height: auto;
 	}
-	
-	/* Mobile styling improvements with new fixes */
+
+	/* Mobile Header Styling */
 	.wrap_header_mobile {
 		height: 70px;
-		box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+		box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
 		padding: 0 1rem;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		position: relative;
+		z-index: 200;
 	}
-	
+
 	.logo-mobile {
 		display: flex;
 		align-items: center;
 	}
-	
+
 	.logo-mobile p {
 		margin-bottom: 0;
 	}
-	
-	.btn-show-menu {
+
+	.mobile-nav-btn {
+		width: 40px;
+		height: 40px;
+		border: none;
+		background: transparent;
 		display: flex;
 		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		position: relative;
+		outline: none;
+		padding: 0;
 	}
-	
+
+	.mobile-nav-icon {
+		position: relative;
+		width: 24px;
+		height: 2px;
+		background-color: #333;
+		transition: all 0.3s ease;
+	}
+
+	.mobile-nav-icon:before,
+	.mobile-nav-icon:after {
+		content: '';
+		position: absolute;
+		width: 24px;
+		height: 2px;
+		background-color: #333;
+		transition: all 0.3s ease;
+	}
+
+	.mobile-nav-icon:before {
+		top: -8px;
+	}
+
+	.mobile-nav-icon:after {
+		top: 8px;
+	}
+
+	.mobile-nav-btn.active .mobile-nav-icon {
+		background-color: transparent;
+	}
+
+	.mobile-nav-btn.active .mobile-nav-icon:before {
+		top: 0;
+		transform: rotate(45deg);
+		background-color: #717fe0;
+	}
+
+	.mobile-nav-btn.active .mobile-nav-icon:after {
+		top: 0;
+		transform: rotate(-45deg);
+		background-color: #717fe0;
+	}
+
+	/* Mobile Header Icons */
 	.header-icons-mobile {
 		display: flex;
 		align-items: center;
 		margin-right: 1rem;
 	}
-	
-	.hamburger-inner, 
-	.hamburger-inner::before, 
-	.hamburger-inner::after {
-		background-color: #333;
-		height: 2px;
-	}
-	
-	.hamburger.is-active .hamburger-inner, 
-	.hamburger.is-active .hamburger-inner::before, 
-	.hamburger.is-active .hamburger-inner::after {
-		background-color: #717fe0;
-	}
-	
-	/* Fix mobile side menu positioning and visibility */
-	.wrap-side-menu {
+
+	.mobile-popup {
 		position: fixed;
-		top: 0;
-		right: -100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%) scale(0.9);
 		width: 300px;
-		max-width: 80%;
-		height: 100vh;
+		max-width: 85%;
+		max-height: 85vh;
 		background-color: white;
-		box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-		transition: all 0.4s ease;
+		border-radius: 16px;
+		box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 		z-index: 1000;
-		padding: 2rem 0;
-		overflow-y: auto;
-	}
-	
-	.wrap-side-menu.show {
-		right: 0;
-	}
-	
-	.side-menu {
-		width: 100%;
-	}
-	
-	.item-menu-mobile {
-		border-bottom: 1px solid #f0f3ff;
-	}
-	
-	.item-menu-mobile a {
-		font-weight: 500;
-		color: #333;
-		padding: 15px 1.5rem;
-		display: block;
-	}
-	
-	.item-menu-mobile:hover a {
-		color: #717fe0;
-		background-color: #f4f6ff;
-	}
-	
-	/* Fix for mobile dropdown */
-	.side-menu .sub-menu {
-		display: none;
-		padding-left: 1rem;
-		background: #f8faff;
-	}
-	
-	.side-menu .sub-menu.show {
-		display: block;
-	}
-	
-	.side-menu .sub-menu a {
-		padding: 12px 15px 12px 30px;
-	}
-	
-	.arrow-main-menu {
-		position: absolute;
-		right: 1.5rem;
-		top: 15px;
-		font-size: 1.2rem;
-		color: #717fe0;
-		transition: all 0.3s ease;
-	}
-	
-	.arrow-main-menu.active {
-		transform: rotate(90deg);
-	}
-	
-	/* Overlay when mobile menu is active */
-	.menu-overlay {
-		position: fixed;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		z-index: 999;
-		display: none;
+		padding: 0;
 		opacity: 0;
-		transition: opacity 0.3s ease;
+		visibility: hidden;
+		transition: all 0.3s ease;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
 	}
-	
-	.menu-overlay.show {
-		display: block;
+
+	.mobile-popup.active {
 		opacity: 1;
+		visibility: visible;
+		transform: translate(-50%, -50%) scale(1);
 	}
-	
-	/* Close button for mobile menu */
-	.mobile-menu-close {
-		position: absolute;
-		top: 1rem;
-		right: 1rem;
-		width: 30px;
-		height: 30px;
+
+	.mobile-popup-header {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		color: #333;
-		border-radius: 50%;
-		background: #f4f6ff;
-		cursor: pointer;
-		transition: all 0.3s ease;
-		z-index: 1001;
+		padding: 20px;
+		position: relative;
+		border-bottom: 1px solid #f0f0f0;
 	}
-	
-	.mobile-menu-close:hover {
-		background: #e3e8ff;
-		color: #717fe0;
+
+	.mobile-popup-title {
+		font-size: 18px;
+		font-weight: 600;
+		color: #333;
+		margin: 0;
+	}
+
+	.mobile-popup-close {
+		position: absolute;
+		right: 16px;
+		top: 50%;
+		transform: translateY(-50%);
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		background-color: #f4f6ff;
+		border: none;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		outline: none;
+	}
+
+	.mobile-popup-close:hover {
+		background-color: #e3e8ff;
+	}
+
+	.mobile-popup-close:focus {
+		box-shadow: 0 0 0 2px rgba(113, 127, 224, 0.2);
+	}
+
+	.mobile-popup-close-icon {
+		width: 12px;
+		height: 12px;
+		position: relative;
+	}
+
+	.mobile-popup-close-icon:before,
+	.mobile-popup-close-icon:after {
+		content: '';
+		position: absolute;
+		width: 12px;
+		height: 2px;
+		background-color: #333;
+		top: 5px;
+	}
+
+	.mobile-popup-close-icon:before {
+		transform: rotate(45deg);
+	}
+
+	.mobile-popup-close-icon:after {
+		transform: rotate(-45deg);
+	}
+
+	.mobile-popup-body {
+		padding: 10px 0;
+		flex-grow: 1;
+		overflow-y: auto;
+	}
+
+	.mobile-popup-menu {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+
+	.mobile-popup-menu-item {
+		position: relative;
+	}
+
+	.mobile-popup-menu-item a {
+		display: block;
+		padding: 15px 20px;
+		color: #333;
+		font-weight: 500;
+		text-decoration: none;
+		border-bottom: 1px solid #f5f5f5;
+		transition: all 0.2s ease;
+		text-align: center;
+	}
+
+	.mobile-popup-menu-item:last-child a {
+		border-bottom: none;
+	}
+
+	.mobile-popup-menu-item a:active {
+		background-color: #f8f9ff;
+	}
+
+	.mobile-popup-submenu {
+		display: none;
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		background-color: #f8f9ff;
+	}
+
+	.mobile-popup-submenu.active {
+		display: block;
+	}
+
+	.mobile-popup-submenu-item a {
+		padding: 12px 20px;
+		color: #666;
+		border-bottom: 1px solid #eee;
+		font-weight: normal;
+	}
+
+	.mobile-popup-submenu-item:last-child a {
+		border-bottom: none;
+	}
+
+	.toggle-submenu {
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		width: 24px;
+		height: 24px;
+		background-color: transparent;
+		border: none;
+		outline: none;
+		cursor: pointer;
+		padding: 0;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.toggle-submenu-icon {
+		width: 10px;
+		height: 10px;
+		position: relative;
+		transition: all 0.2s ease;
+	}
+
+	.toggle-submenu-icon:before,
+	.toggle-submenu-icon:after {
+		content: '';
+		position: absolute;
+		background-color: #717fe0;
+		transition: all 0.2s ease;
+	}
+
+	.toggle-submenu-icon:before {
+		width: 2px;
+		height: 10px;
+		left: 4px;
+		top: 0;
+	}
+
+	.toggle-submenu-icon:after {
+		width: 10px;
+		height: 2px;
+		left: 0;
+		top: 4px;
+	}
+
+	.toggle-submenu.active .toggle-submenu-icon:before {
+		opacity: 0;
+	}
+
+	.badge {
+		display: inline-block;
+		padding: 0.25em 0.6em;
+		font-size: 75%;
+		font-weight: 700;
+		line-height: 1;
+		text-align: center;
+		white-space: nowrap;
+		vertical-align: baseline;
+		border-radius: 10px;
+		margin-left: 5px;
+	}
+
+	.badge-primary {
+		color: #fff;
+		background-color: #717fe0;
 	}
 </style>
-
-<!-- Menu overlay for mobile -->
-<div class="menu-overlay"></div>
 
 <!-- Header -->
 <header class="header1">
@@ -358,7 +505,7 @@
 		<div class="wrap_header">
 			<!-- Logo -->
 			<a href="/" class="logo">
-				<p style="color: black; "><b style="font-size: 22px;">F</b>leet<b>F</b>oot</p>
+				<p style="color: black;"><b style="font-size: 22px;">F</b>leet<b>F</b>oot</p>
 			</a>
 
 			<!-- Menu -->
@@ -410,120 +557,140 @@
 	<div class="wrap_header_mobile">
 		<!-- Logo mobile -->
 		<a href="/" class="logo-mobile">
-			<p style="color: black; "><b style="font-size: 22px;">F</b>leetFoot</p>
+			<p style="color: black;"><b style="font-size: 22px;">F</b>leetFoot</p>
 		</a>
 
-		<!-- Button show menu -->
-		<div class="btn-show-menu">
-			<!-- Header Icon mobile -->
-			<div class="header-icons-mobile">
-				{% if request.user.is_authenticated %}
-				<a href="{% url 'core:order-summary' %}" class="header-wrapicon1 dis-block">
-					<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1" alt="ICON">
-					<span class="header-icons-noti">{{ request.user|cart_item_count }}</span>
-				</a>
-				{% else %}
-				<a href="{% url 'account_login' %}" class="header-wrapicon1 dis-block">
-					<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
-				</a>
-				{% endif %}
-			</div>
-
-			<div class="btn-show-menu-mobile hamburger hamburger--squeeze">
-				<span class="hamburger-box">
-					<span class="hamburger-inner"></span>
-				</span>
-			</div>
+		<!-- Header Icon mobile -->
+		<div class="header-icons-mobile">
+			{% if request.user.is_authenticated %}
+			<a href="{% url 'core:order-summary' %}" class="header-wrapicon1 dis-block">
+				<img src="{% static 'images/icons/icon-header-02.png' %}" class="header-icon1" alt="ICON">
+				<span class="header-icons-noti">{{ request.user|cart_item_count }}</span>
+			</a>
+			{% else %}
+			<a href="{% url 'account_login' %}" class="header-wrapicon1 dis-block">
+				<img src="{% static 'images/icons/icon-header-01.png' %}" class="header-icon1" alt="ICON">
+			</a>
+			{% endif %}
 		</div>
+
+		<!-- Mobile menu button -->
+		<button class="mobile-nav-btn">
+			<span class="mobile-nav-icon"></span>
+		</button>
 	</div>
 
-	<!-- Menu Mobile -->
-	<div class="wrap-side-menu">
-		<!-- Close button -->
-		<div class="mobile-menu-close">
-			<i class="fa fa-times"></i>
+	<!-- NEW Mobile Popup Menu -->
+	<div class="mobile-popup">
+		<div class="mobile-popup-header">
+			<h3 class="mobile-popup-title">Menu</h3>
+			<button class="mobile-popup-close">
+				<span class="mobile-popup-close-icon"></span>
+			</button>
 		</div>
-		
-		<nav class="side-menu">
-			<ul class="main-menu">
-				<li class="item-menu-mobile">
+		<div class="mobile-popup-body">
+			<ul class="mobile-popup-menu">
+				<li class="mobile-popup-menu-item">
 					<a href="/">Home</a>
 				</li>
-
-				<li class="item-menu-mobile">
-					<a href="/shop">Shop</a>
+				<li class="mobile-popup-menu-item">
+					<a href="/shop/">Shop</a>
 				</li>
 
-				{% categories_mobile %}
+				<!-- {% categories_mobile %} -->
 
 				{% if request.user.is_authenticated %}
-				<li class="item-menu-mobile">
-					<a href="{% url 'core:order-summary' %}">Cart<span
-							class="badge badge-primary ml-2">{{ request.user|cart_item_count }}</span></a>
+				<li class="mobile-popup-menu-item">
+					<a href="{% url 'core:order-summary' %}">Cart <span
+							class="badge badge-primary">{{ request.user|cart_item_count }}</span></a>
 				</li>
-				<li class="item-menu-mobile">
+				<li class="mobile-popup-menu-item">
 					<a href="{% url 'core:my-orders' %}">My Orders</a>
 				</li>
-				<li class="item-menu-mobile">
+				<li class="mobile-popup-menu-item">
 					<a href="{% url 'account_logout' %}">Logout</a>
 				</li>
 				{% else %}
-				<li class="item-menu-mobile">
+				<li class="mobile-popup-menu-item">
 					<a href="#">Login</a>
-					<ul class="sub-menu">
-						<li><a href="{% url 'account_login' %}">Login</a></li>
-						<li><a href="{% url 'account_signup' %}">SignUp</a></li>
+					<button class="toggle-submenu">
+						<span class="toggle-submenu-icon"></span>
+					</button>
+					<ul class="mobile-popup-submenu">
+						<li class="mobile-popup-submenu-item">
+							<a href="{% url 'account_login' %}">Login</a>
+						</li>
+						<li class="mobile-popup-submenu-item">
+							<a href="{% url 'account_signup' %}">SignUp</a>
+						</li>
 					</ul>
-					<i class="arrow-main-menu fa fa-angle-right" aria-hidden="true"></i>
 				</li>
 				{% endif %}
 			</ul>
-		</nav>
+		</div>
 	</div>
 </header>
 
 <script>
-	document.addEventListener('DOMContentLoaded', function() {
-		// Mobile menu toggle
-		const hamburger = document.querySelector('.btn-show-menu-mobile');
-		const sideMenu = document.querySelector('.wrap-side-menu');
-		const menuOverlay = document.querySelector('.menu-overlay');
-		const closeButton = document.querySelector('.mobile-menu-close');
+	document.addEventListener('DOMContentLoaded', function () {
+		// Variables
+		const mobileNavBtn = document.querySelector('.mobile-nav-btn');
+		const mobilePopup = document.querySelector('.mobile-popup');
+		const mobilePopupClose = document.querySelector('.mobile-popup-close');
+		const toggleSubmenuBtns = document.querySelectorAll('.toggle-submenu');
 
-		let isMenuOpen = false; // Track menu state
+		// Functions
+		function toggleMobilePopup() {
+			mobilePopup.classList.toggle('active');
+			mobileNavBtn.classList.toggle('active');
 
-		const toggleMenu = (state) => {
-			isMenuOpen = state;
-			hamburger.classList.toggle('is-active', isMenuOpen);
-			sideMenu.classList.toggle('show', isMenuOpen);
-			menuOverlay.classList.toggle('show', isMenuOpen);
-			document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-		};
+			// Prevent body scrolling when popup is open
+			if (mobilePopup.classList.contains('active')) {
+				document.body.style.overflow = 'hidden';
+			} else {
+				document.body.style.overflow = '';
+			}
+		}
 
-		hamburger.addEventListener('click', function() {
-			toggleMenu(true);
-		});
+		function closeMobilePopup() {
+			mobilePopup.classList.remove('active');
+			mobileNavBtn.classList.remove('active');
+			document.body.style.overflow = '';
+		}
 
-		menuOverlay.addEventListener('click', function() {
-			toggleMenu(false);
-		});
+		// Event Listeners
+		mobileNavBtn.addEventListener('click', toggleMobilePopup);
+		mobilePopupClose.addEventListener('click', closeMobilePopup);
 
-		closeButton.addEventListener('click', function() {
-			toggleMenu(false);
-		});
-
-		// Mobile dropdown toggle
-		const arrowMainMenu = document.querySelectorAll('.arrow-main-menu');
-
-		arrowMainMenu.forEach(function(arrow) {
-			arrow.addEventListener('click', function(e) {
+		// Toggle submenus
+		toggleSubmenuBtns.forEach(btn => {
+			btn.addEventListener('click', function (e) {
 				e.preventDefault();
-				e.stopPropagation();
-				this.classList.toggle('active');
 
-				const subMenu = this.previousElementSibling;
-				subMenu.classList.toggle('show');
+				const submenu = this.nextElementSibling;
+
+				// Toggle active class on button and submenu
+				this.classList.toggle('active');
+				submenu.classList.toggle('active');
 			});
+		});
+
+		// Close popup when clicking menu items (except those with submenus)
+		const menuItems = document.querySelectorAll('.mobile-popup-menu-item > a:not(.has-submenu)');
+		menuItems.forEach(item => {
+			item.addEventListener('click', function () {
+				// Only close if not a submenu parent
+				if (!this.parentElement.querySelector('.mobile-popup-submenu')) {
+					closeMobilePopup();
+				}
+			});
+		});
+
+		// Close popup when pressing ESC key
+		document.addEventListener('keydown', function (e) {
+			if (e.key === 'Escape' && mobilePopup.classList.contains('active')) {
+				closeMobilePopup();
+			}
 		});
 	});
 </script>
