@@ -8,7 +8,7 @@ from django.views.generic import ListView, DetailView, View
 from django.shortcuts import redirect
 from django.utils import timezone
 from .forms import CheckoutForm, CouponForm, RefundForm
-from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund, Category
+from .models import Item, OrderItem, Order, BillingAddress, Payment, Coupon, Refund, Category, ProductRating
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from .utils import CITIES_LIST
@@ -134,6 +134,25 @@ class ShopView(ListView):
 class ItemDetailView(DetailView):
     model = Item
     template_name = "product-detail.html"
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        
+        # Add ratings data to the context
+        product_ratings = ProductRating.objects.filter(product=self.object)
+        context['product_ratings'] = product_ratings
+        
+        # Calculate average rating
+        avg_rating = 0
+        if product_ratings.exists():
+            avg_rating = self.object.get_average_rating()
+        context['average_rating'] = avg_rating
+        
+        # Update review count in the tab title
+        review_count = product_ratings.count()
+        context['review_count'] = review_count
+        
+        return context
 
 
 # class CategoryView(DetailView):
@@ -247,29 +266,74 @@ class CheckoutView(View):
 @login_required
 def add_to_cart(request, slug):
     item = get_object_or_404(Item, slug=slug)
-    order_item, created = OrderItem.objects.get_or_create(
+    
+    # Get shoe size from request parameters
+    shoe_size_id = request.GET.get('shoe_size')
+    quantity = int(request.GET.get('quantity', 1))
+    
+    # Validate that size is selected for shoes
+    if not shoe_size_id and item.available_sizes.exists():
+        messages.error(request, "Please select a shoe size")
+        return redirect("core:product", slug=slug)
+    
+    # Get the ShoeSize object if size was selected
+    size = None
+    if shoe_size_id:
+        from .models import ShoeSize
+        try:
+            size = ShoeSize.objects.get(id=shoe_size_id)
+        except:
+            messages.error(request, "Invalid shoe size selected")
+            return redirect("core:product", slug=slug)
+    
+    # Check if we have this item with the same size in cart already
+    order_item_qs = OrderItem.objects.filter(
         item=item,
         user=request.user,
-        ordered=False
+        ordered=False,
+        size=size
     )
+    
     order_qs = Order.objects.filter(user=request.user, ordered=False)
+    
     if order_qs.exists():
         order = order_qs[0]
-        if order.items.filter(item__slug=item.slug).exists():
-            order_item.quantity += 1
+        
+        # If this item with same size exists in the cart
+        if order_item_qs.exists():
+            order_item = order_item_qs[0]
+            order_item.quantity += quantity
             order_item.save()
-            messages.info(request, "Item qty was updated.")
-            return redirect("core:order-summary")
+            messages.info(request, f"Item quantity was updated to {order_item.quantity}")
         else:
+            # Create new order item with selected size
+            order_item = OrderItem.objects.create(
+                item=item,
+                user=request.user,
+                ordered=False,
+                size=size,
+                quantity=quantity
+            )
             order.items.add(order_item)
-            messages.info(request, "Item was added to your cart.")
-            return redirect("core:order-summary")
+            messages.info(request, "Item was added to your cart")
     else:
+        # Create a new order
         ordered_date = timezone.now()
         order = Order.objects.create(
-            user=request.user, ordered_date=ordered_date)
+            user=request.user, 
+            ordered_date=ordered_date
+        )
+        # Create new order item with selected size
+        order_item = OrderItem.objects.create(
+            item=item,
+            user=request.user,
+            ordered=False,
+            size=size,
+            quantity=quantity
+        )
         order.items.add(order_item)
-        messages.info(request, "Item was added to your cart.")
+        messages.info(request, "Item was added to your cart")
+    
     return redirect("core:order-summary")
 
 
@@ -405,3 +469,43 @@ class MyOrdersView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user, ordered=True).order_by('-ordered_date')
+
+
+@login_required
+def add_product_rating(request, product_id):
+    """Allow users to add ratings and reviews to products they've purchased"""
+    try:
+        product = get_object_or_404(Item, id=product_id)
+        
+        # Check if this user has already rated this product
+        existing_rating = ProductRating.objects.filter(product=product, user=request.user).first()
+        
+        # Get the rating and comment from the form
+        rating = request.POST.get('rating')
+        comment = request.POST.get('comment')
+        
+        if not rating:
+            messages.error(request, "Please provide a rating")
+            return redirect("core:product", slug=product.slug)
+            
+        if existing_rating:
+            # Update existing rating
+            existing_rating.rating = rating
+            existing_rating.comment = comment
+            existing_rating.save()
+            messages.success(request, "Your review has been updated")
+        else:
+            # Create new rating
+            ProductRating.objects.create(
+                product=product,
+                user=request.user,
+                rating=rating,
+                comment=comment
+            )
+            messages.success(request, "Your review has been submitted")
+        
+        return redirect("core:product", slug=product.slug)
+        
+    except Exception as e:
+        messages.error(request, f"Error submitting review: {str(e)}")
+        return redirect("core:home")

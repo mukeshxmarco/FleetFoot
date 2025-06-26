@@ -65,6 +65,35 @@
         </li>
       </ul>
       
+      {% if order.shipping_address or order.billing_address %}
+      <div class="card mt-3 mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Shipping Information</h5>
+          {% if order.shipping_address %}
+            <address class="mb-0">
+              <strong>{{ order.user.username }}</strong><br>
+              {{ order.shipping_address.street_address }}<br>
+              {% if order.shipping_address.apartment_address %}
+                {{ order.shipping_address.apartment_address }}<br>
+              {% endif %}
+              {{ order.shipping_address.city }}, {{ order.shipping_address.zip }}<br>
+              {{ order.shipping_address.country.name }}
+            </address>
+          {% elif order.billing_address %}
+            <address class="mb-0">
+              <strong>{{ order.user.username }}</strong><br>
+              {{ order.billing_address.street_address }}<br>
+              {% if order.billing_address.apartment_address %}
+                {{ order.billing_address.apartment_address }}<br>
+              {% endif %}
+              {{ order.billing_address.city }}, {{ order.billing_address.zip }}<br>
+              {{ order.billing_address.country.name }}
+            </address>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+      
       {% if DISPLAY_COUPON_FORM %}
       <form method="POST" action="{% url 'core:add-coupon' %}" class="card p-2">
         {% csrf_token %}

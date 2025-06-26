@@ -1,15 +1,17 @@
 from django.conf import settings
 from django.db import models
-from django.db.models import Sum
+from django.db.models import Sum, Avg
 from django.shortcuts import reverse
 from django_countries.fields import CountryField
 
 # Create your models here.
 CATEGORY_CHOICES = (
-    ('SB', 'Shirts And Blouses'),
-    ('TS', 'T-Shirts'),
-    ('SK', 'Skirts'),
-    ('HS', 'Hoodies&Sweatshirts')
+    ('SN', 'Sneakers'),
+    ('SP', 'Sports Shoes'),
+    ('FM', 'Formal Shoes'),
+    ('CS', 'Casual Shoes'),
+    ('SL', 'Slippers & Flip Flops'),
+    ('BT', 'Boots')
 )
 
 LABEL_CHOICES = (
@@ -22,6 +24,23 @@ ADDRESS_CHOICES = (
     ('B', 'Billing'),
     ('S', 'Shipping'),
 )
+
+ORDER_STATUS = (
+    ('processing', 'Processing'),
+    ('shipped', 'Shipped'),
+    ('delivered', 'Delivered'),
+    ('cancelled', 'Cancelled'),
+    ('refund_requested', 'Refund Requested'),
+    ('refund_granted', 'Refund Granted'),
+)
+
+
+class ShoeSize(models.Model):
+    size_number = models.CharField(max_length=5)
+    size_text = models.CharField(max_length=10, blank=True, null=True)  # like "Medium", "Large" if needed
+    
+    def __str__(self):
+        return self.size_number
 
 
 class Slide(models.Model):
@@ -62,6 +81,7 @@ class Item(models.Model):
     description_long = models.TextField()
     image = models.ImageField()
     is_active = models.BooleanField(default=True)
+    available_sizes = models.ManyToManyField(ShoeSize)
 
     def __str__(self):
         return self.title
@@ -80,6 +100,12 @@ class Item(models.Model):
         return reverse("core:remove-from-cart", kwargs={
             'slug': self.slug
         })
+        
+    def get_average_rating(self):
+        ratings = ProductRating.objects.filter(product=self)
+        if ratings.exists():
+            return ratings.aggregate(Avg('rating'))['rating__avg']
+        return 0
 
 
 class OrderItem(models.Model):
@@ -88,9 +114,11 @@ class OrderItem(models.Model):
     ordered = models.BooleanField(default=False)
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
+    size = models.ForeignKey(ShoeSize, on_delete=models.CASCADE, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.quantity} of {self.item.title}"
+        size_str = f" - Size: {self.size}" if self.size else ""
+        return f"{self.quantity} of {self.item.title}{size_str}"
 
     def get_total_item_price(self):
         return self.quantity * self.item.price
@@ -127,6 +155,7 @@ class Order(models.Model):
     received = models.BooleanField(default=False)
     refund_requested = models.BooleanField(default=False)
     refund_granted = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=ORDER_STATUS, default='processing')
 
     '''
     1. Item added to cart
@@ -148,6 +177,26 @@ class Order(models.Model):
         if self.coupon:
             total -= self.coupon.amount
         return total
+        
+    def update_status_from_flags(self):
+        """Update status based on order flag fields for backward compatibility"""
+        if self.refund_granted:
+            self.status = 'refund_granted'
+        elif self.refund_requested:
+            self.status = 'refund_requested'
+        elif self.received:
+            self.status = 'delivered'
+        elif self.being_delivered:
+            self.status = 'shipped'
+        elif self.ordered:
+            self.status = 'processing'
+        else:
+            self.status = 'processing'
+        
+    def save(self, *args, **kwargs):
+        # For backward compatibility, update status based on flags
+        self.update_status_from_flags()
+        super().save(*args, **kwargs)
 
 
 class BillingAddress(models.Model):
@@ -196,3 +245,17 @@ class Refund(models.Model):
 
     def __str__(self):
         return f"{self.pk}"
+
+
+class ProductRating(models.Model):
+    product = models.ForeignKey(Item, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    rating = models.IntegerField()
+    comment = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ('product', 'user')
+
+    def __str__(self):
+        return f"{self.rating} - {self.product.title} - {self.user.username}"

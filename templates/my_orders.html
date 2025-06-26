@@ -63,7 +63,23 @@
             </ul>
           </td>
           <td>₹{{ order.get_total }}</td>
-          <td class="order-status">Completed</td>
+          <td class="order-status">
+            {% if order.status == 'processing' %}
+              <span class="badge badge-primary">Processing</span>
+            {% elif order.status == 'shipped' %}
+              <span class="badge badge-info">Shipped</span>
+            {% elif order.status == 'delivered' %}
+              <span class="badge badge-success">Delivered</span> 
+            {% elif order.status == 'cancelled' %}
+              <span class="badge badge-secondary">Cancelled</span>
+            {% elif order.status == 'refund_requested' %}
+              <span class="badge badge-warning">Refund Requested</span>
+            {% elif order.status == 'refund_granted' %}
+              <span class="badge badge-danger">Refund Granted</span>
+            {% else %}
+              <span class="badge badge-primary">Processing</span>
+            {% endif %}
+          </td>
         </tr>
         {% empty %}
         <tr>

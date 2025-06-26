@@ -1,9 +1,22 @@
 from django.contrib import admin
 
-from .models import Item, OrderItem, Order, Payment, Coupon, Refund, BillingAddress, Category, Slide
+from .models import Item, OrderItem, Order, Payment, Coupon, Refund, BillingAddress, Category, Slide, ShoeSize, ProductRating
 
 
 # Register your models here.
+
+# ShoeSize admin configuration
+class ShoeSizeAdmin(admin.ModelAdmin):
+    list_display = ['size_number', 'size_text']
+    search_fields = ['size_number', 'size_text']
+
+# ProductRating admin configuration
+
+
+class ProductRatingAdmin(admin.ModelAdmin):
+    list_display = ['product', 'user', 'rating', 'created_at']
+    list_filter = ['rating', 'created_at']
+    search_fields = ['product__title', 'user__username', 'comment']
 
 
 def make_refund_accepted(modeladmin, request, queryset):
@@ -15,25 +28,20 @@ make_refund_accepted.short_description = 'Update orders to refund granted'
 
 class OrderAdmin(admin.ModelAdmin):
     list_display = ['user',
+                    'ref_code',
                     'ordered',
-                    'being_delivered',
-                    'received',
-                    'refund_requested',
-                    'refund_granted',
-                    'shipping_address',
-                    'billing_address',
-                    'payment',
+                    'status',
+                    'billing_address_display',
                     'coupon'
                     ]
     list_display_links = [
         'user',
-        'shipping_address',
-        'billing_address',
-        'payment',
+        'ref_code',
         'coupon'
     ]
     list_filter = ['user',
                    'ordered',
+                   'status',
                    'being_delivered',
                    'received',
                    'refund_requested',
@@ -42,7 +50,36 @@ class OrderAdmin(admin.ModelAdmin):
         'user__username',
         'ref_code'
     ]
+    readonly_fields= [
+        'ref_code',
+        'start_date',
+        'ordered_date',
+        'shipping_address_display',
+        'billing_address_display',
+        'payment',
+        'coupon',
+        'refund_requested',
+        'refund_granted',
+        'being_delivered',
+        'received',
+        'ordered',
+        'billing_address',
+        'shipping_address'
+    ]
     actions = [make_refund_accepted]
+
+    def shipping_address_display(self, obj):
+        if obj.shipping_address:
+            return f"{obj.shipping_address.street_address}, {obj.shipping_address.city}, {obj.shipping_address.country}"
+        return "-"
+
+    def billing_address_display(self, obj):
+        if obj.billing_address:
+            return f"{obj.billing_address.street_address}, {obj.billing_address.city}, {obj.billing_address.country}"
+        return "-"
+
+    shipping_address_display.short_description = "Shipping Address"
+    billing_address_display.short_description = "Billing Address"
 
 
 class AddressAdmin(admin.ModelAdmin):
@@ -78,6 +115,7 @@ class ItemAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ("title",)}
     actions = [copy_items]
 
+
 class CategoryAdmin(admin.ModelAdmin):
     list_display = [
         'title',
@@ -97,3 +135,5 @@ admin.site.register(Payment)
 admin.site.register(Coupon)
 admin.site.register(Refund)
 admin.site.register(BillingAddress, AddressAdmin)
+admin.site.register(ShoeSize, ShoeSizeAdmin)
+admin.site.register(ProductRating, ProductRatingAdmin)

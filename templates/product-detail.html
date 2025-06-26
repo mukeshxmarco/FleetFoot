@@ -10,7 +10,7 @@
     margin-bottom: 2rem;
     border-bottom: 1px solid #e3e8ff;
   }
-  
+
   .custom-breadcrumb {
     display: flex;
     align-items: center;
@@ -19,46 +19,46 @@
     list-style: none;
     flex-wrap: wrap;
   }
-  
+
   .custom-breadcrumb li {
     display: flex;
     align-items: center;
     margin-right: 0.5rem;
   }
-  
+
   .custom-breadcrumb a {
     color: #717171;
     font-size: 0.95rem;
     transition: all 0.3s ease;
   }
-  
+
   .custom-breadcrumb a:hover {
     color: #717fe0;
     text-decoration: none;
   }
-  
+
   .custom-breadcrumb li:last-child {
     color: #333;
     font-weight: 600;
   }
-  
+
   .breadcrumb-separator {
     margin: 0 0.5rem;
     color: #ccc;
   }
-  
+
   .product-detail-container {
     padding: 2rem 0 5rem;
   }
-  
+
   /* Fix gallery on small screens */
   .product-gallery {
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
     margin-bottom: 2rem;
   }
-  
+
   .product-image {
     width: 100%;
     border-radius: 15px;
@@ -66,18 +66,18 @@
     aspect-ratio: 1/1;
     object-fit: cover;
   }
-  
+
   .product-image:hover {
     transform: scale(1.02);
   }
-  
+
   .product-thumbnails {
     display: flex;
     margin-top: 1rem;
     gap: 1rem;
     flex-wrap: wrap;
   }
-  
+
   .product-thumb {
     width: 80px;
     height: 80px;
@@ -87,32 +87,32 @@
     overflow: hidden;
     transition: all 0.3s ease;
   }
-  
+
   .product-thumb:hover {
     border-color: #717fe0;
     transform: translateY(-3px);
   }
-  
+
   .product-thumb.active {
     border-color: #717fe0;
   }
-  
+
   .product-thumb img {
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  
+
   .product-info-wrapper {
     padding: 1rem 0;
   }
-  
+
   @media (min-width: 992px) {
     .product-info-wrapper {
       padding: 1rem 0 1rem 2rem;
     }
   }
-  
+
   .product-title {
     font-size: 2rem;
     font-weight: 700;
@@ -120,55 +120,55 @@
     color: #333;
     line-height: 1.3;
   }
-  
+
   @media (max-width: 576px) {
     .product-title {
       font-size: 1.5rem;
       margin-bottom: 1rem;
     }
   }
-  
+
   .product-price {
     margin-bottom: 1.5rem;
   }
-  
+
   .product-original-price {
     font-size: 1.5rem;
     color: #999;
     text-decoration: line-through;
     margin-right: 0.8rem;
   }
-  
+
   @media (max-width: 576px) {
     .product-original-price {
       font-size: 1.2rem;
     }
   }
-  
+
   .product-discount-price {
     font-size: 2rem;
     font-weight: 700;
     color: #e74c3c;
   }
-  
+
   @media (max-width: 576px) {
     .product-discount-price {
       font-size: 1.6rem;
     }
   }
-  
+
   .product-regular-price {
     font-size: 2rem;
     font-weight: 700;
     color: #333;
   }
-  
+
   @media (max-width: 576px) {
     .product-regular-price {
       font-size: 1.6rem;
     }
   }
-  
+
   .product-short-desc {
     font-size: 1rem;
     line-height: 1.7;
@@ -177,11 +177,11 @@
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #e3e8ff;
   }
-  
+
   .product-options {
     margin-bottom: 2rem;
   }
-  
+
   .option-label {
     font-size: 1rem;
     font-weight: 600;
@@ -189,22 +189,22 @@
     color: #333;
     display: block;
   }
-  
+
   .option-select {
     margin-bottom: 1.5rem;
   }
-  
+
   .quantity-selector {
     display: flex;
     flex-direction: column;
     margin-bottom: 1.5rem;
   }
-  
+
   .quantity-controls {
     display: flex;
     align-items: center;
   }
-  
+
   .quantity-btn {
     width: 40px;
     height: 40px;
@@ -217,11 +217,11 @@
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  
+
   .quantity-btn:hover {
     background: #e3e8ff;
   }
-  
+
   .quantity-input {
     width: 60px;
     height: 40px;
@@ -231,21 +231,21 @@
     margin: 0 0.5rem;
     border-radius: 8px;
   }
-  
+
   .product-actions {
     display: flex;
     gap: 1rem;
     margin-bottom: 2rem;
     flex-wrap: wrap;
   }
-  
+
   @media (max-width: 576px) {
     .product-actions {
       flex-direction: column;
       gap: 0.75rem;
     }
   }
-  
+
   .btn-add-to-cart {
     flex-grow: 2;
     background: linear-gradient(90deg, #717fe0 0%, #5c6bc0 100%);
@@ -256,20 +256,20 @@
     border-radius: 50px;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    box-shadow: 0 4px 15px rgba(113,127,224,0.2);
+    box-shadow: 0 4px 15px rgba(113, 127, 224, 0.2);
     transition: all 0.3s ease;
     text-align: center;
     display: inline-block;
   }
-  
+
   .btn-add-to-cart:hover {
     background: linear-gradient(90deg, #5c6bc0 0%, #717fe0 100%);
     transform: translateY(-3px);
-    box-shadow: 0 6px 18px rgba(113,127,224,0.25);
+    box-shadow: 0 6px 18px rgba(113, 127, 224, 0.25);
     color: white;
     text-decoration: none;
   }
-  
+
   .btn-remove-from-cart {
     flex-grow: 1;
     background: white;
@@ -284,14 +284,14 @@
     text-align: center;
     display: inline-block;
   }
-  
+
   .btn-remove-from-cart:hover {
     background: #f4f6ff;
     border-color: #c1c9f8;
     color: #333;
     text-decoration: none;
   }
-  
+
   .product-meta {
     display: flex;
     align-items: center;
@@ -300,14 +300,14 @@
     border-bottom: 1px solid #e3e8ff;
     flex-wrap: wrap;
   }
-  
+
   .product-meta span {
     color: #717171;
     margin-right: 1.5rem;
     font-size: 0.95rem;
     margin-bottom: 0.5rem;
   }
-  
+
   /* Fix social share icons */
   .social-share {
     display: flex;
@@ -315,12 +315,12 @@
     flex-wrap: wrap;
     gap: 1rem;
   }
-  
+
   .social-share .option-label {
     margin-bottom: 0;
     margin-right: 0.5rem;
   }
-  
+
   .social-icon {
     display: inline-flex;
     align-items: center;
@@ -332,41 +332,43 @@
     color: #717fe0;
     transition: all 0.3s ease;
   }
-  
+
   .social-icon:hover {
     background-color: #717fe0;
     color: white;
     transform: translateY(-3px);
     text-decoration: none;
   }
-  
+
   /* Product details tabs - with responsive fixes */
   .product-details-tabs {
     margin-top: 3rem;
   }
-  
+
   .tab-container {
     border: 1px solid #e3e8ff;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     margin-bottom: 2rem;
   }
-  
+
   .tabs {
     display: flex;
     background-color: #f8faff;
     border-bottom: 1px solid #e3e8ff;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
   }
-  
+
   .tabs::-webkit-scrollbar {
     display: none;
   }
-  
+
   .tab-btn {
     padding: 1.2rem 2rem;
     font-weight: 600;
@@ -376,39 +378,116 @@
     border-bottom: 3px solid transparent;
     white-space: nowrap;
   }
-  
+
   @media (max-width: 576px) {
     .tab-btn {
       padding: 1rem 1.5rem;
       font-size: 0.9rem;
     }
   }
-  
-  .tab-btn.active, .tab-btn:hover {
+
+  .tab-btn.active,
+  .tab-btn:hover {
     color: #717fe0;
     border-bottom-color: #717fe0;
   }
-  
+
   .tab-content {
     padding: 2rem;
     display: none;
   }
-  
+
   @media (max-width: 576px) {
     .tab-content {
       padding: 1.5rem;
     }
   }
-  
+
   .tab-content.active {
     display: block;
   }
-  
+
   .tab-content p {
     font-size: 1rem;
     line-height: 1.8;
     color: #666;
     margin-bottom: 1rem;
+  }
+
+  .product-ratings {
+    margin-top: 1.5rem;
+  }
+
+  .overall-rating {
+    margin-bottom: 1rem;
+  }
+
+  .rating-stars {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .rating-stars i {
+    margin-right: 2px;
+  }
+
+  .review-list {
+    margin-top: 1.5rem;
+  }
+
+  .review-item {
+    background: #f9f9f9;
+    border: 1px solid #e3e8ff;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .review-item strong {
+    color: #333;
+  }
+
+  .review-item .text-warning {
+    color: #e74c3c !important;
+  }
+
+  .review-item small {
+    color: #999;
+  }
+
+  .review-form {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #f9f9f9;
+    border: 1px solid #e3e8ff;
+    border-radius: 10px;
+  }
+
+  .review-form label {
+    font-weight: 600;
+    color: #333;
+  }
+
+  .review-form .star-rating {
+    display: inline-flex;
+    direction: rtl;
+  }
+
+  .review-form .star-rating input {
+    display: none;
+  }
+
+  .review-form .star-rating label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ddd;
+    transition: color 0.3s ease;
+  }
+
+  .review-form .star-rating input:checked ~ label,
+  .review-form .star-rating label:hover,
+  .review-form .star-rating label:hover ~ label {
+    color: #e74c3c;
   }
 </style>
 
@@ -417,7 +496,8 @@
   <div class="container">
     <ul class="custom-breadcrumb">
       <li><a href="/">Home</a><span class="breadcrumb-separator"><i class="fa fa-angle-right"></i></span></li>
-      <li><a href="{% url 'core:category' object.category.slug %}">{{ object.category }}</a><span class="breadcrumb-separator"><i class="fa fa-angle-right"></i></span></li>
+      <li><a href="{% url 'core:category' object.category.slug %}">{{ object.category }}</a><span
+          class="breadcrumb-separator"><i class="fa fa-angle-right"></i></span></li>
       <li>{{object.title}}</li>
     </ul>
   </div>
@@ -431,127 +511,172 @@
       <div class="col-lg-6 mb-4 mb-lg-0">
         <div class="product-gallery">
           <img src="{{ object.image.url }}" alt="{{ object.title }}" class="product-image" id="main-product-image">
-          
+
           <div class="product-thumbnails">
             <div class="product-thumb active" data-img="{{ object.image.url }}">
               <img src="{{ object.image.url }}" alt="{{ object.title }}">
             </div>
-            <div class="product-thumb" data-img="{% static 'images/product-detail2.jpg' %}">
-              <img src="{% static 'images/product-detail2.jpg' %}" alt="Product view 2">
-            </div>
-            <div class="product-thumb" data-img="{% static 'images/product-detail3.jpg' %}">
-              <img src="{% static 'images/product-detail3.jpg' %}" alt="Product view 3">
-            </div>
           </div>
         </div>
       </div>
-      
+
       <!-- Product Info -->
       <div class="col-lg-6">
         <div class="product-info-wrapper">
           <h1 class="product-title">{{object.title}}</h1>
-          
+
           <div class="product-price">
             {% if object.discount_price %}
-              <span class="product-original-price">₹{{ object.price }}</span>
-              <span class="product-discount-price">₹{{ object.discount_price }}</span>
+            <span class="product-original-price">₹{{ object.price }}</span>
+            <span class="product-discount-price">₹{{ object.discount_price }}</span>
             {% else %}
-              <span class="product-regular-price">₹{{object.price}}</span>
+            <span class="product-regular-price">₹{{object.price}}</span>
             {% endif %}
           </div>
-          
+
           <div class="product-short-desc">
             {{ object.description_short }}
           </div>
-          
-          <div class="product-options">
-            <div class="option-select">
-              <label class="option-label">Size</label>
-              <select class="form-control" name="size">
-                <option>Choose an option</option>
-                <option>S</option>
-                <option>M</option>
-                <option>L</option>
-                <option>XL</option>
-              </select>
-            </div>
-            
-            <div class="option-select">
-              <label class="option-label">Color</label>
-              <select class="form-control" name="color">
-                <option>Choose an option</option>
-                <option>Gray</option>
-                <option>Red</option>
-                <option>Black</option>
-                <option>Blue</option>
-              </select>
-            </div>
-            
-            <div class="quantity-selector">
-              <label class="option-label">Quantity</label>
-              <div class="quantity-controls">
-                <div class="quantity-btn minus">
-                  <i class="fa fa-minus"></i>
-                </div>
-                <input type="text" class="quantity-input" value="1">
-                <div class="quantity-btn plus">
-                  <i class="fa fa-plus"></i>
+
+          <form id="add-to-cart-form" method="GET" action="{{ object.get_add_to_cart_url }}">
+            <div class="product-options">
+              <div class="option-select">
+                <label class="option-label">Size <span style="color: red">*</span></label>
+                <select class="form-control" name="shoe_size" id="shoe_size" required>
+                  <option value="">Select a size</option>
+                  {% for size in object.available_sizes.all %}
+                    <option value="{{ size.id }}">{{ size.size_number }}</option>
+                  {% empty %}
+                    <option value="" disabled>No sizes available</option>
+                  {% endfor %}
+                </select>
+                <small class="text-danger size-error d-none">Please select a size before adding to cart</small>
+              </div>
+
+              <div class="quantity-selector">
+                <label class="option-label">Quantity</label>
+                <div class="quantity-controls">
+                  <div class="quantity-btn minus">
+                    <i class="fa fa-minus"></i>
+                  </div>
+                  <input type="text" name="quantity" class="quantity-input" value="1">
+                  <div class="quantity-btn plus">
+                    <i class="fa fa-plus"></i>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-          
-          <div class="product-actions">
-            <a href="{{ object.get_add_to_cart_url }}" class="btn-add-to-cart">
-              <i class="fa fa-shopping-cart mr-2"></i> Add to Cart
-            </a>
-            <a href="{{object.get_remove_from_cart_url}}" class="btn-remove-from-cart">
-              Remove
-            </a>
-          </div>
-          
+
+            <div class="product-actions">
+              <button type="submit" class="btn-add-to-cart">
+                <i class="fa fa-shopping-cart mr-2"></i> Add to Cart
+              </button>
+              <a href="{{object.get_remove_from_cart_url}}" class="btn-remove-from-cart">
+                Remove
+              </a>
+            </div>
+          </form>
+
           <div class="product-meta">
             <span><i class="fa fa-tag mr-2"></i> SKU: {{ object.stock_no }}</span>
             <span><i class="fa fa-folder mr-2"></i> Category: {{ object.category }}</span>
           </div>
-          
-          <!-- Social Share -->
-          <div class="social-share">
-            <span class="option-label">Share: </span>
-            <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-pinterest"></i></a>
-            <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-          </div>
         </div>
       </div>
     </div>
-    
+
     <!-- Product Details Tabs -->
     <div class="product-details-tabs">
       <div class="tab-container">
         <div class="tabs">
           <div class="tab-btn active" data-target="description">Description</div>
           <div class="tab-btn" data-target="additional">Additional Information</div>
-          <div class="tab-btn" data-target="reviews">Reviews (0)</div>
+          <div class="tab-btn" data-target="reviews">Reviews ({{ review_count|default:"0" }})</div>
         </div>
-        
+
         <div id="description" class="tab-content active">
           <p>{{ object.description_long }}</p>
         </div>
-        
+
         <div id="additional" class="tab-content">
           <p>
             <strong>Weight:</strong> 0.5 kg<br>
             <strong>Dimensions:</strong> 20 × 15 × 10 cm<br>
             <strong>Materials:</strong> 80% cotton, 20% polyester<br>
-            <strong>Other Info:</strong> Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat.
+            <strong>Other Info:</strong> Fusce ornare mi vel risus porttitor dignissim. Nunc eget risus at ipsum blandit
+            ornare vel sed velit. Proin gravida arcu nisl, a dignissim mauris placerat.
           </p>
         </div>
-        
+
         <div id="reviews" class="tab-content">
-          <p>There are no reviews yet.</p>
-          <button class="btn btn-primary mt-3">Write a Review</button>
+          {% if product_ratings %}
+            <div class="product-ratings">
+              <div class="overall-rating mb-4">
+                <h3>Overall Rating: {{ average_rating|floatformat:1 }}/5</h3>
+                <div class="rating-stars">
+                  {% for i in "12345" %}
+                    {% if forloop.counter <= average_rating|floatformat:"0" %}
+                      <i class="fa fa-star text-warning"></i>
+                    {% elif forloop.counter <= average_rating|add:"0.5"|floatformat:"0" %}
+                      <i class="fa fa-star-half-o text-warning"></i>
+                    {% else %}
+                      <i class="fa fa-star-o text-warning"></i>
+                    {% endif %}
+                  {% endfor %}
+                  <span class="ml-2">({{ product_ratings|length }} reviews)</span>
+                </div>
+              </div>
+              
+              <div class="review-list">
+                {% for rating in product_ratings %}
+                  <div class="review-item p-3 mb-3 border rounded">
+                    <div class="d-flex justify-content-between mb-2">
+                      <div>
+                        <strong>{{ rating.user.username }}</strong>
+                        <div class="rating-stars">
+                          {% for i in "12345" %}
+                            <i class="fa {% if forloop.counter <= rating.rating %}fa-star{% else %}fa-star-o{% endif %} text-warning"></i>
+                          {% endfor %}
+                        </div>
+                      </div>
+                      <small class="text-muted">{{ rating.created_at|date:"d M Y" }}</small>
+                    </div>
+                    {% if rating.comment %}
+                      <p class="mb-0">{{ rating.comment }}</p>
+                    {% endif %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% else %}
+            <p>There are no reviews yet.</p>
+          {% endif %}
+
+          {% if user.is_authenticated %}
+            <hr>
+            <h4 class="mt-4">Write a Review</h4>
+            <form method="post" action="{% url 'core:add_rating' object.id %}" class="review-form mt-3">
+              {% csrf_token %}
+              <div class="form-group">
+                <label for="rating">Your Rating <span class="text-danger">*</span></label>
+                <div class="rating-selector">
+                  <div class="star-rating">
+                    {% for i in "12345" %}
+                      <input type="radio" id="star{{ i }}" name="rating" value="{{ i }}" required {% if i == "5" %}checked{% endif %}>
+                      <label for="star{{ i }}"><i class="fa fa-star"></i></label>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mt-3">
+                <label for="comment">Your Review (optional)</label>
+                <textarea class="form-control" id="comment" name="comment" rows="4"></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary mt-3">Submit Review</button>
+            </form>
+          {% else %}
+            <p class="mt-4">Please <a href="{% url 'account_login' %}">login</a> to write a review.</p>
+          {% endif %}
         </div>
       </div>
     </div>
@@ -567,48 +692,48 @@
 
 <script>
   // Thumbnail gallery functionality
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function () {
     const mainImage = document.getElementById('main-product-image');
     const thumbs = document.querySelectorAll('.product-thumb');
-    
+
     thumbs.forEach(thumb => {
-      thumb.addEventListener('click', function() {
+      thumb.addEventListener('click', function () {
         // Update main image
         mainImage.src = this.getAttribute('data-img');
-        
+
         // Update active class
         thumbs.forEach(t => t.classList.remove('active'));
         this.classList.add('active');
       });
     });
-    
+
     // Quantity buttons functionality
     const minusBtn = document.querySelector('.quantity-btn.minus');
     const plusBtn = document.querySelector('.quantity-btn.plus');
     const quantityInput = document.querySelector('.quantity-input');
-    
-    minusBtn.addEventListener('click', function() {
+
+    minusBtn.addEventListener('click', function () {
       let value = parseInt(quantityInput.value);
       if (value > 1) {
         quantityInput.value = value - 1;
       }
     });
-    
-    plusBtn.addEventListener('click', function() {
+
+    plusBtn.addEventListener('click', function () {
       let value = parseInt(quantityInput.value);
       quantityInput.value = value + 1;
     });
-    
+
     // Tabs functionality
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
-    
+
     tabBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
+      btn.addEventListener('click', function () {
         // Update active tab button
         tabBtns.forEach(b => b.classList.remove('active'));
         this.classList.add('active');
-        
+
         // Show selected tab content
         const target = this.getAttribute('data-target');
         tabContents.forEach(content => {
