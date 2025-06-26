@@ -6,30 +6,38 @@
     width: 100%;
     background: #fff;
     border-radius: 15px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
     margin: 2rem 0;
     overflow-x: auto;
   }
-  .orders-table th, .orders-table td {
+
+  .orders-table th,
+  .orders-table td {
     padding: 1rem;
     text-align: left;
     border-bottom: 1px solid #f0f3ff;
   }
+
   .orders-table th {
     background: #f8faff;
     font-weight: 700;
     color: #333;
   }
+
   .orders-table tr:last-child td {
     border-bottom: none;
   }
+
   .order-status {
     font-weight: 600;
     color: #717fe0;
     text-transform: capitalize;
   }
+
   @media (max-width: 768px) {
-    .orders-table th, .orders-table td {
+
+    .orders-table th,
+    .orders-table td {
       padding: 0.7rem;
       font-size: 0.95rem;
     }
@@ -49,7 +57,7 @@
           <th>Status</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody style="max-width: 80vw; overflow-x: scroll;">
         {% for order in orders %}
         <tr>
           <td>{{ forloop.counter }}</td>
@@ -58,26 +66,26 @@
           <td>
             <ul style="margin:0; padding-left: 1rem;">
               {% for item in order.items.all %}
-                <li>{{ item.item.title }} (x{{ item.quantity }})</li>
+              <li>{{ item.item.title }} (x{{ item.quantity }})</li>
               {% endfor %}
             </ul>
           </td>
           <td>₹{{ order.get_total }}</td>
           <td class="order-status">
             {% if order.status == 'processing' %}
-              <span class="badge badge-primary">Processing</span>
+            <span class="badge badge-primary">Processing</span>
             {% elif order.status == 'shipped' %}
-              <span class="badge badge-info">Shipped</span>
+            <span class="badge badge-info">Shipped</span>
             {% elif order.status == 'delivered' %}
-              <span class="badge badge-success">Delivered</span> 
+            <span class="badge badge-success">Delivered</span>
             {% elif order.status == 'cancelled' %}
-              <span class="badge badge-secondary">Cancelled</span>
+            <span class="badge badge-secondary">Cancelled</span>
             {% elif order.status == 'refund_requested' %}
-              <span class="badge badge-warning">Refund Requested</span>
+            <span class="badge badge-warning">Refund Requested</span>
             {% elif order.status == 'refund_granted' %}
-              <span class="badge badge-danger">Refund Granted</span>
+            <span class="badge badge-danger">Refund Granted</span>
             {% else %}
-              <span class="badge badge-primary">Processing</span>
+            <span class="badge badge-primary">Processing</span>
             {% endif %}
           </td>
         </tr>
@@ -89,15 +97,15 @@
       </tbody>
     </table>
     {% if is_paginated %}
-      <div class="modern-pagination mt-4">
-        {% if page_obj.has_previous %}
-          <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo;</a>
-        {% endif %}
-        <span class="page-link active">{{ page_obj.number }}</span>
-        {% if page_obj.has_next %}
-          <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
-        {% endif %}
-      </div>
+    <div class="modern-pagination mt-4">
+      {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}" class="page-link">&laquo;</a>
+      {% endif %}
+      <span class="page-link active">{{ page_obj.number }}</span>
+      {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="page-link">&raquo;</a>
+      {% endif %}
+    </div>
     {% endif %}
   </div>
 </div>
